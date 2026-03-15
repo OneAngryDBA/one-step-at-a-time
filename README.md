@@ -1,6 +1,6 @@
-# Action Organizer
+# One Step at a Time (OStaaP)
 
-A comprehensive daily task, project, and life management system for Claude Code using the PARA method.
+A comprehensive daily task, project, and life management plugin for Claude Code using the PARA method. One step at a time.
 
 ## What It Does
 
@@ -14,7 +14,7 @@ A comprehensive daily task, project, and life management system for Claude Code 
 ## Install
 
 ```bash
-claude plugin install ./action-organizer.plugin
+claude plugin install ./one-step-at-a-time.plugin
 ```
 
 Then restart Claude Code and run `/start-day`.
