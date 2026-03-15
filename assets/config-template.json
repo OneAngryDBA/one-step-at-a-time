@@ -1,0 +1,124 @@
+{
+  "version": "1.0.0",
+  "archiving": {
+    "daysBeforeArchive": 3,
+    "autoArchiveOnStartDay": false,
+    "organizeByMonth": false
+  },
+  "defaults": {
+    "priority": "🟡 Medium",
+    "timing": "⏭️ Next",
+    "askForResistance": false,
+    "askForBreakdown": false
+  },
+  "files": {
+    "todoPrefix": "todo",
+    "finishedPrefix": "finished",
+    "dateFormat": "YYYY-MM-DD",
+    "archiveFolder": "archive",
+    "scheduledFolder": "scheduled"
+  },
+  "integrations": {
+    "googleCalendar": {
+      "enabled": false,
+      "calendarId": "primary"
+    },
+    "jira": {
+      "enabled": false,
+      "projects": [],
+      "filters": {
+        "assignedToMe": true,
+        "excludeStatuses": ["Done", "Closed", "Resolved"]
+      }
+    },
+    "googleDocs": {
+      "enabled": false,
+      "documentIds": []
+    },
+    "github": {
+      "enabled": false,
+      "repositories": [],
+      "filters": {
+        "assignedToMe": true,
+        "state": "open"
+      }
+    },
+    "slack": {
+      "enabled": false,
+      "workspaceId": "",
+      "filters": {
+        "includeReminders": true,
+        "includeSavedItems": true
+      }
+    }
+  },
+  "projects": {
+    "enabled": true,
+    "autoCalculateProgress": true,
+    "showInStartDay": true,
+    "archiveFolder": "projects-archive",
+    "templatesFolder": "templates/projects",
+    "weeklyReviewDay": "friday"
+  },
+  "git": {
+    "autoCommit": true,
+    "commitOnActions": [
+      "/start-day",
+      "/dump",
+      "/brain-dump",
+      "/add-task",
+      "/review-day",
+      "/refine",
+      "/archive-old",
+      "/new-project",
+      "/update-project",
+      "/link-task",
+      "/reopen-project",
+      "/review-projects",
+      "/new-area",
+      "/list-areas",
+      "/update-area",
+      "/review-areas"
+    ],
+    "commitThreshold": {
+      "minChanges": 1,
+      "minTasks": 2
+    },
+    "messageTemplate": {
+      "enabled": true,
+      "format": "{{action}}: {{summary}}\n\n{{details}}\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>"
+    }
+  },
+  "dueDates": {
+    "enabled": true,
+    "checkOnStartDay": true,
+    "checkOnReviewDay": true,
+    "checkOnWeeklyReview": true,
+    "warnings": {
+      "taskAfterProject": true,
+      "multipleHighPrioritySameDay": true,
+      "insufficientTime": true
+    },
+    "autoSuggest": true,
+    "bufferDays": 2
+  },
+  "areas": {
+    "enabled": true,
+    "showInStartDay": true,
+    "showInReviewDay": true,
+    "dueSoonDays": 2,
+    "loadCheck": true,
+    "loadThresholds": {
+      "dailyTaskCount": 8,
+      "dailyTimeMinutes": 360,
+      "overdueRecurringItems": 3,
+      "totalDueRecurringItems": 5
+    }
+  },
+  "display": {
+    "showCarryOverNotes": true,
+    "showTimeEstimates": true,
+    "showDependencies": true,
+    "showContext": true
+  }
+}

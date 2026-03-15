@@ -1,0 +1,104 @@
+{
+  "name": "action-organizer",
+  "version": "3.0.0",
+  "description": "Comprehensive daily task, project, and life management system using the PARA method. Transform messy thoughts into organized tasks, track projects with goals and timelines, manage areas of responsibility with habits/maintenance/obligations, and maintain a daily workflow with automatic rollover. Includes 18 slash commands, 4 proactive skills, and support for recurring items with consequence tracking.",
+  "author": "Matt Brennan",
+  "license": "MIT",
+  "compatibility": {
+    "claude_code": ">=1.0.0"
+  },
+  "commands": {
+    "start-day": "../commands/start-day.md",
+    "dump": "../commands/dump.md",
+    "brain-dump": "../commands/brain-dump.md",
+    "add-task": "../commands/add-task.md",
+    "review-day": "../commands/review-day.md",
+    "refine": "../commands/refine.md",
+    "archive-old": "../commands/archive-old.md",
+    "new-project": "../commands/new-project.md",
+    "list-projects": "../commands/list-projects.md",
+    "update-project": "../commands/update-project.md",
+    "link-task": "../commands/link-task.md",
+    "reopen-project": "../commands/reopen-project.md",
+    "review-projects": "../commands/review-projects.md",
+    "allocate-time": "../commands/allocate-time.md",
+    "pull": "../commands/pull.md",
+    "new-area": "../commands/new-area.md",
+    "list-areas": "../commands/list-areas.md",
+    "update-area": "../commands/update-area.md",
+    "review-areas": "../commands/review-areas.md"
+  },
+  "skills": {
+    "task-organization": "../skills/task-organization",
+    "daily-workflow": "../skills/daily-workflow",
+    "project-management": "../skills/project-management",
+    "area-management": "../skills/area-management"
+  },
+  "settings": {
+    "archiving.daysBeforeArchive": {
+      "type": "number",
+      "default": 3,
+      "description": "Days before archiving old todo/finished files"
+    },
+    "defaults.priority": {
+      "type": "string",
+      "default": "🟡 Medium",
+      "description": "Default task priority"
+    },
+    "defaults.timing": {
+      "type": "string",
+      "default": "⏭️ Next",
+      "description": "Default task timing"
+    },
+    "projects.enabled": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable project management features"
+    },
+    "projects.autoCalculateProgress": {
+      "type": "boolean",
+      "default": true,
+      "description": "Auto-calculate project progress from tasks"
+    },
+    "projects.showInStartDay": {
+      "type": "boolean",
+      "default": true,
+      "description": "Show active projects in /start-day"
+    },
+    "areas.enabled": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable areas of responsibility features"
+    },
+    "areas.showInStartDay": {
+      "type": "boolean",
+      "default": true,
+      "description": "Show area reminders in /start-day"
+    },
+    "areas.showInReviewDay": {
+      "type": "boolean",
+      "default": true,
+      "description": "Show upcoming recurring items in /review-day"
+    },
+    "areas.loadCheck": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable load check when thresholds are exceeded"
+    },
+    "git.autoCommit": {
+      "type": "boolean",
+      "default": true,
+      "description": "Automatically commit changes after commands"
+    },
+    "dueDates.checkOnStartDay": {
+      "type": "boolean",
+      "default": true,
+      "description": "Check for overdue tasks during /start-day"
+    },
+    "dueDates.checkOnReviewDay": {
+      "type": "boolean",
+      "default": true,
+      "description": "Check for overdue/upcoming tasks during /review-day"
+    }
+  }
+}
