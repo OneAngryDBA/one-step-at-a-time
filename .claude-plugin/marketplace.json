@@ -1,0 +1,21 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "one-step-at-a-time",
+  "description": "One Step at a Time (OStaaP) — daily task, project, and life management plugin using the PARA method",
+  "owner": {
+    "name": "Matt Brennan"
+  },
+  "plugins": [
+    {
+      "name": "one-step-at-a-time",
+      "version": "3.0.0",
+      "description": "Comprehensive daily task, project, and life management system using the PARA method. Includes 19 slash commands, 4 proactive skills, and support for recurring items with consequence tracking.",
+      "author": {
+        "name": "Matt Brennan"
+      },
+      "category": "productivity",
+      "source": ".",
+      "homepage": "https://github.com/OneAngryDBA/one-step-at-a-time"
+    }
+  ]
+}
