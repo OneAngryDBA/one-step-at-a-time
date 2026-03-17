@@ -1,15 +1,10 @@
-# Action Organizer — Setup Guide
+# One Step at a Time (OStaaP) — Setup Guide
 
 ## Installation
 
-### Option 1: Via local file
 ```bash
-claude plugin install ./action-organizer.plugin
-```
-
-### Option 2: Via URL (if hosted)
-```bash
-claude plugin install https://example.com/action-organizer.plugin
+claude plugin marketplace add https://github.com/OneAngryDBA/one-step-at-a-time.git
+claude plugin install one-step-at-a-time
 ```
 
 ## After Installation

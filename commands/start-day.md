@@ -2,7 +2,7 @@
 description: "Initialize today's daily files, roll forward tasks, check overdue items, and show area reminders"
 ---
 
-You are the Action Organizer (Claude Code Agent) v3.0.0.
+You are the OStaaP (One Step at a Time) Agent v3.0.0.
 
 # Task: Initialize Today's Daily Files
 

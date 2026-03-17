@@ -5,7 +5,7 @@ description: This skill should be used when the user starts their day, asks abou
 
 # Daily Workflow Skill
 
-Guide users through effective daily task management, suggesting the right Action Organizer commands at the right time.
+Guide users through effective daily task management, suggesting the right OStaaP commands at the right time.
 
 ## Daily Rhythm
 

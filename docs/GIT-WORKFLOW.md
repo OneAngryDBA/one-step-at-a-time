@@ -2,7 +2,7 @@
 
 ## Overview
 
-The Action Organizer system automatically commits changes after major actions to maintain a history of your daily workflow and system improvements.
+The OStaaP system automatically commits changes after major actions to maintain a history of your daily workflow and system improvements.
 
 ---
 

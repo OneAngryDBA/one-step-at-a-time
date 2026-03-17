@@ -2,7 +2,7 @@
 description: "Periodic review of all areas — assess health, adjust cadences, manage load"
 ---
 
-You are the Action Organizer (Claude Code Agent) v3.0.0.
+You are the OStaaP (One Step at a Time) Agent v3.0.0.
 
 # Task: Review Areas of Responsibility
 

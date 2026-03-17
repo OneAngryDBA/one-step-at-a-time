@@ -1,13 +1,13 @@
 ---
 name: task-organization
-description: This skill should be used when the user shares messy task thoughts, brain dumps, unstructured lists, todos, work items, or errands that need organizing into the Action Organizer format. It applies when the user mentions "I need to", "I have to", "I should", pastes a list, describes multiple things to get done, or wants to use the /dump command. It should not be used for general codebase questions, single simple requests, or conversations that do not involve task capture.
+description: This skill should be used when the user shares messy task thoughts, brain dumps, unstructured lists, todos, work items, or errands that need organizing into the OStaaP format. It applies when the user mentions "I need to", "I have to", "I should", pastes a list, describes multiple things to get done, or wants to use the /dump command. It should not be used for general codebase questions, single simple requests, or conversations that do not involve task capture.
 ---
 
 # Task Organization Skill
 
-Organize messy task thoughts into the Action Organizer format. When a user mentions tasks or things they need to do, proactively structure them.
+Organize messy task thoughts into the OStaaP format. When a user mentions tasks or things they need to do, proactively structure them.
 
-## Action Organizer Task Format
+## OStaaP Task Format
 
 ```markdown
 - 🔴 High ⏰ Now 🔧 45 min 📅 2026-03-05 #project-tag

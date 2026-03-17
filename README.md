@@ -14,7 +14,8 @@ A comprehensive daily task, project, and life management plugin for Claude Code 
 ## Install
 
 ```bash
-claude plugin install ./one-step-at-a-time.plugin
+claude plugin marketplace add https://github.com/OneAngryDBA/one-step-at-a-time.git
+claude plugin install one-step-at-a-time
 ```
 
 Then restart Claude Code and run `/start-day`.
@@ -26,6 +27,7 @@ Then restart Claude Code and run `/start-day`.
 |---------|-------------|
 | `/start-day` | Initialize today, roll forward tasks, show reminders |
 | `/dump` | Brain dump thoughts → organized tasks |
+| `/brain-dump` | Alias for `/dump` |
 | `/add-task` | Add a single task with guided questions |
 | `/review-day` | Mark complete, review upcoming items |
 | `/refine` | Refine existing tasks |

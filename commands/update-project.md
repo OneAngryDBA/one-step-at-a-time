@@ -2,7 +2,7 @@
 description: "Update project status, priority, timeline, goals, or archive when complete"
 ---
 
-You are the Action Organizer (Claude Code Agent) v3.0.0.
+You are the OStaaP (One Step at a Time) Agent v3.0.0.
 
 # Task: Update Project
 

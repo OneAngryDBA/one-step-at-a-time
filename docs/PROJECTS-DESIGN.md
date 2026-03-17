@@ -45,7 +45,7 @@ Projects provide a higher-level organizational layer above daily tasks. Each pro
 ## File Structure
 
 ```
-todo-for-now/
+your-project/
 ├── PROJECTS.md                    # Active projects overview
 ├── projects-archive/              # Completed/archived projects
 │   ├── project-name.md            # Individual archived project

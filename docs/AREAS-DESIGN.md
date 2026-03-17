@@ -289,7 +289,7 @@ At `/start-day`, the system checks for:
 
 ## Philosophy
 
-Consistent with Action Organizer principles:
+Consistent with OStaaP principles:
 - **Reduce friction** — easy to add and track recurring items
 - **Create clarity** — three tiers make it obvious what needs attention
 - **Bias toward action** — nudge, don't nag

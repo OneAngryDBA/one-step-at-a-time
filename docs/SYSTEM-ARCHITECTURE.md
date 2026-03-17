@@ -1,15 +1,15 @@
-# Action Organizer — System Architecture
+# One Step at a Time (OStaaP) — System Architecture
 
-**Version:** 2.0.1-claude-code
-**Last Updated:** 2026-03-15
+**Version:** 3.0.0
+**Last Updated:** 2026-03-16
 
-This document explains how the Action Organizer system works from end to end. It is intended for someone picking up this system for the first time — or for future-you when you need a refresher on why things are the way they are.
+This document explains how the OStaaP system works from end to end. It is intended for someone picking up this system for the first time — or for future-you when you need a refresher on why things are the way they are.
 
 ---
 
 ## What This System Is
 
-The Action Organizer is a markdown-based task management system powered by Claude Code slash commands. There is no application code, no database, no server. Everything is:
+OStaaP is a markdown-based task management system powered by Claude Code slash commands. There is no application code, no database, no server. Everything is:
 
 - **Markdown files** — human-readable, version-controlled, portable
 - **Claude Code slash commands** — defined in `.claude/commands/`, invoked as `/start-day`, `/dump`, etc.
@@ -467,6 +467,7 @@ Every task in the system follows a consistent format:
 | `/new-area` | Create a new area with recurring items |
 | `/list-areas` | Show all areas with item statuses |
 | `/update-area` | Add/edit/remove/pause/promote recurring items |
+| `/review-areas` | Periodic area review with health checks |
 
 ### External Integrations
 | Command | Purpose |
@@ -494,7 +495,7 @@ The system is built on five principles that show up in every design decision:
 
 ## How It All Fits Together
 
-The Action Organizer is, at its core, a system for managing attention across different time horizons:
+OStaaP is, at its core, a system for managing attention across different time horizons:
 
 - **Areas** manage the long game — ongoing responsibilities that never end.
 - **Projects** manage the medium game — focused efforts with a finish line.

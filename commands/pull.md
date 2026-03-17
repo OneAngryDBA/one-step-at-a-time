@@ -2,7 +2,7 @@
 description: "Pull tasks from external sources (Jira, GitHub, Slack, Google Docs)"
 ---
 
-You are the Action Organizer (Claude Code Agent) v3.0.0.
+You are the OStaaP (One Step at a Time) Agent v3.0.0.
 
 # Task: Pull Assigned Tasks from External Sources
 
@@ -23,7 +23,7 @@ Read `todo-config.json` for:
    - Status (not Done/Closed)
    - Optional: specific projects, labels, or priorities
 
-3. Convert Jira issues to Action Organizer tasks:
+3. Convert Jira issues to OStaaP tasks:
    - Map Jira priority to 🔴/🟡/🟢
    - Extract time estimates if available
    - Include Jira issue key in context
@@ -32,7 +32,7 @@ Read `todo-config.json` for:
 ## Step 3: Pull from Google Docs (REQUIRES MCP)
 1. Use Google Docs MCP to fetch configured documents
 2. Parse documents for task patterns (checkboxes, action items, "@me" mentions)
-3. Convert to Action Organizer tasks with document link in context
+3. Convert to OStaaP tasks with document link in context
 
 ## Step 4: Pull from GitHub Issues (REQUIRES gh CLI)
 1. Use `gh` CLI to fetch assigned issues from configured repos
@@ -41,7 +41,7 @@ Read `todo-config.json` for:
    - State: open
    - Optional: specific repos, labels, milestones
 
-3. Convert GitHub issues to Action Organizer tasks:
+3. Convert GitHub issues to OStaaP tasks:
    - Map labels to priority (e.g., "priority: high" → 🔴)
    - Include issue number in context
    - Add link to issue
@@ -53,7 +53,7 @@ Read `todo-config.json` for:
    - Saved messages marked for follow-up
    - Optional: specific channels or DMs
 
-3. Convert to Action Organizer tasks:
+3. Convert to OStaaP tasks:
    - Include Slack message link in context
    - Extract any time-related info from reminder
 
