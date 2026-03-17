@@ -104,6 +104,7 @@ The plugin includes proactive skills that respond to natural language:
 - [System Architecture](docs/SYSTEM-ARCHITECTURE.md)
 - [Areas Design](docs/AREAS-DESIGN.md)
 - [Projects Design](docs/PROJECTS-DESIGN.md)
+- [Roadmap](docs/ROADMAP.md) — planned enhancements and future ideas
 
 ## License
 
