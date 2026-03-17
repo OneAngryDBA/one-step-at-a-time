@@ -40,7 +40,7 @@ OStaaT installs globally and uses a **central workspace** — a single directory
 
 Run `/setup` to configure.
 
-## Commands (20)
+## Commands (21)
 
 ### Setup
 | Command | Description |
@@ -82,7 +82,12 @@ Run `/setup` to configure.
 | `/allocate-time` | Schedule against Google Calendar |
 | `/pull` | Pull from Jira, GitHub, Slack |
 
-## Skills (5)
+### Help
+| Command | Description |
+|---------|-------------|
+| `/ostaat-help` | Interactive help and command reference |
+
+## Skills (6)
 
 The plugin includes proactive skills that respond to natural language:
 - **workspace-resolution** — resolves which workspace to use before any command
@@ -90,9 +95,11 @@ The plugin includes proactive skills that respond to natural language:
 - **daily-workflow** — guides your daily rhythm
 - **project-management** — helps with project-scale work
 - **area-management** — helps with chores, habits, obligations
+- **help** — answers questions about how OStaaT works and what's available
 
 ## Documentation
 
+- [Usage Guide](docs/USAGE.md) — slash commands vs natural language, how to interact
 - [Setup Guide](docs/SETUP.md)
 - [System Architecture](docs/SYSTEM-ARCHITECTURE.md)
 - [Areas Design](docs/AREAS-DESIGN.md)
