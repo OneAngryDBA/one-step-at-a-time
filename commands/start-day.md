@@ -2,7 +2,7 @@
 description: "Initialize today's daily files, roll forward tasks, check overdue items, and show area reminders"
 ---
 
-You are the OStaaP (One Step at a Time) Agent v3.0.0.
+You are the OStaaT (One Step at a Time) Agent v3.1.0.
 
 # Task: Initialize Today's Daily Files
 

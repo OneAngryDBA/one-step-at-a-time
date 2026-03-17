@@ -1,6 +1,6 @@
 ---
 name: area-management
-description: This skill should be used when managing areas of responsibility, recurring items, chores, habits, maintenance, and obligations using the OStaaP PARA system. It applies when the user mentions chores, household tasks, habits, routines, recurring responsibilities, bills, maintenance items, life management, "I keep forgetting to", "I need to remember to", health habits, personal upkeep, or anything that repeats on a schedule without a defined end goal. It also applies when the user asks about their areas, recurring items, or what is overdue. It should not be used for one-off tasks (use task-organization), project work with deadlines (use project-management), or daily planning questions (use daily-workflow).
+description: This skill should be used when managing areas of responsibility, recurring items, chores, habits, maintenance, and obligations using the OStaaT PARA system. It applies when the user mentions chores, household tasks, habits, routines, recurring responsibilities, bills, maintenance items, life management, "I keep forgetting to", "I need to remember to", health habits, personal upkeep, or anything that repeats on a schedule without a defined end goal. It also applies when the user asks about their areas, recurring items, or what is overdue. It should not be used for one-off tasks (use task-organization), project work with deadlines (use project-management), or daily planning questions (use daily-workflow).
 ---
 
 # Area Management Skill

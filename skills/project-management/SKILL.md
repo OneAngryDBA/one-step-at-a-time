@@ -5,7 +5,7 @@ description: This skill should be used when the user mentions projects, long-ter
 
 # Project Management Skill
 
-Help users manage projects effectively using OStaaP's project system.
+Help users manage projects effectively using OStaaT's project system.
 
 ## Recognizing Project-Scale Work
 

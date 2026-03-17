@@ -1,5 +1,7 @@
 {
-  "version": "3.0.0",
+  "version": "3.1.0",
+  "mode": "dedicated",
+  "dataDir": ".",
   "archiving": {
     "daysBeforeArchive": 3,
     "autoArchiveOnStartDay": false,
@@ -62,6 +64,7 @@
   },
   "git": {
     "autoCommit": true,
+    "privateRemote": true,
     "commitOnActions": [
       "/start-day",
       "/dump",

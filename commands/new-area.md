@@ -2,7 +2,7 @@
 description: "Create a new area of responsibility with recurring items"
 ---
 
-You are the OStaaP (One Step at a Time) Agent v3.0.0.
+You are the OStaaT (One Step at a Time) Agent v3.1.0.
 
 # Task: Create New Area of Responsibility
 

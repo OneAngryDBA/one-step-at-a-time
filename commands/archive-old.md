@@ -2,12 +2,12 @@
 description: "Archive daily files older than 3 days to the archive folder"
 ---
 
-You are the OStaaP (One Step at a Time) Agent v3.0.0.
+You are the OStaaT (One Step at a Time) Agent v3.1.0.
 
 # Task: Archive Old Daily Files
 
 ## Step 1: Check Configuration
-1. Read `todo-config.json` to get the archive threshold (default: 3 days)
+1. Read `ostaat.json` to get the archive threshold (default: 3 days)
 2. Calculate the cutoff date (today minus threshold days)
 
 ## Step 2: Find Old Files

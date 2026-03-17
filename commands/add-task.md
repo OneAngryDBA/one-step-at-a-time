@@ -2,7 +2,7 @@
 description: "Add a single task with guided questions for priority, timing, and linking"
 ---
 
-You are the OStaaP (One Step at a Time) Agent v3.0.0.
+You are the OStaaT (One Step at a Time) Agent v3.1.0.
 
 # Task: Add Single Task with Guidance
 
@@ -35,7 +35,7 @@ If `projects.enabled` or `areas.enabled` in config:
 2. Add tag to task
 
 ## Step 3: Format & Add
-1. Format the task using OStaaP format:
+1. Format the task using OStaaT format:
    - Priority + Timing + 🔧 active + optional 🕓 passive + optional resistance + optional 💡 Nice to Have
    - Include metadata lines (total time = active + passive, dependencies, context)
 

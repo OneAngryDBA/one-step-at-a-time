@@ -2,7 +2,7 @@
 
 ## Overview
 
-The OStaaP system automatically commits changes after major actions to maintain a history of your daily workflow and system improvements.
+The OStaaT system automatically commits changes after major actions to maintain a history of your daily workflow and system improvements.
 
 ---
 
@@ -10,7 +10,7 @@ The OStaaP system automatically commits changes after major actions to maintain 
 
 ### When Commits Happen
 
-**Auto-commit triggers** (configurable in `todo-config.json`):
+**Auto-commit triggers** (configurable in `ostaat.json`):
 - After `/start-day` - Daily initialization
 - After `/dump` or `/brain-dump` - Brain dump sessions
 - After `/add-task` - Single task additions (batched if multiple in succession)
@@ -29,7 +29,7 @@ The OStaaP system automatically commits changes after major actions to maintain 
 ### What Gets Tracked
 
 **Everything:**
-- System files (`todo-config.json`)
+- System files (`ostaat.json`)
 - Daily todo files (`YYYY-MM-DD-todo.md`)
 - Finished files (`YYYY-MM-DD-finished.md`)
 - Archive folder and all archived files
@@ -122,7 +122,7 @@ The system doesn't prevent manual commits - auto-commits just reduce friction.
 
 ## Configuration
 
-In `todo-config.json`:
+In `ostaat.json`:
 
 ```json
 "git": {

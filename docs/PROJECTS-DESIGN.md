@@ -385,7 +385,7 @@ Users can create new templates by:
 
 ## Configuration
 
-Add to `todo-config.json`:
+Add to `ostaat.json`:
 
 ```json
 "projects": {

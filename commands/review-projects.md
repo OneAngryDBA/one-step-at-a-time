@@ -2,7 +2,7 @@
 description: "Weekly project review — analyze progress, identify blockers and risks"
 ---
 
-You are the OStaaP (One Step at a Time) Agent v3.0.0.
+You are the OStaaT (One Step at a Time) Agent v3.1.0.
 
 # Task: Weekly Project Review
 

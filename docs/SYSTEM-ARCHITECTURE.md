@@ -1,15 +1,15 @@
-# One Step at a Time (OStaaP) — System Architecture
+# One Step at a Time (OStaaT) — System Architecture
 
 **Version:** 3.0.0
 **Last Updated:** 2026-03-16
 
-This document explains how the OStaaP system works from end to end. It is intended for someone picking up this system for the first time — or for future-you when you need a refresher on why things are the way they are.
+This document explains how the OStaaT system works from end to end. It is intended for someone picking up this system for the first time — or for future-you when you need a refresher on why things are the way they are.
 
 ---
 
 ## What This System Is
 
-OStaaP is a markdown-based task management system powered by Claude Code slash commands. There is no application code, no database, no server. Everything is:
+OStaaT is a markdown-based task management system powered by Claude Code slash commands. There is no application code, no database, no server. Everything is:
 
 - **Markdown files** — human-readable, version-controlled, portable
 - **Claude Code slash commands** — defined in the plugin's `commands/` directory, invoked as `/start-day`, `/dump`, etc.
@@ -249,7 +249,7 @@ flowchart LR
         ARCHIVE["archive/\nOld daily files"]
         PROJARCH["projects-archive/\nCompleted projects"]
         TEMPLATES["templates/projects/\nProject templates"]
-        CONFIG["todo-config.json\nSystem settings"]
+        CONFIG["ostaat.json\nSystem settings"]
     end
 
     subgraph Commands["Slash Commands"]
@@ -308,11 +308,11 @@ flowchart LR
 | `archive/` | Daily files older than 3 days | `/archive-old` | -- |
 | `projects-archive/` | Completed/archived project files | `/update-project` | `/reopen-project` (moves back) |
 | `templates/projects/` | Project templates (default, client-project, personal-goal) | Manual | Manual |
-| `todo-config.json` | System-wide settings, thresholds, feature flags | Manual | Manual |
+| `ostaat.json` | System-wide settings, thresholds, feature flags | Manual | Manual |
 
 ### Configuration highlights
 
-The `todo-config.json` file controls system behavior without touching command code. Key settings:
+The `ostaat.json` file controls system behavior without touching command code. Key settings:
 
 - **`areas.loadCheck`** and **`areas.loadThresholds`** — Enable/disable and tune the daily load check (max tasks, max minutes, max overdue items).
 - **`dueDates.enabled`** — Toggle the entire due date tracking subsystem.
@@ -495,7 +495,7 @@ The system is built on five principles that show up in every design decision:
 
 ## How It All Fits Together
 
-OStaaP is, at its core, a system for managing attention across different time horizons:
+OStaaT is, at its core, a system for managing attention across different time horizons:
 
 - **Areas** manage the long game — ongoing responsibilities that never end.
 - **Projects** manage the medium game — focused efforts with a finish line.

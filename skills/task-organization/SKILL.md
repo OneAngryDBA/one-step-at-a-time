@@ -1,13 +1,13 @@
 ---
 name: task-organization
-description: This skill should be used when the user shares messy task thoughts, brain dumps, unstructured lists, todos, work items, or errands that need organizing into the OStaaP format. It applies when the user mentions "I need to", "I have to", "I should", pastes a list, describes multiple things to get done, or wants to use the /dump command. It should not be used for general codebase questions, single simple requests, or conversations that do not involve task capture.
+description: This skill should be used when the user shares messy task thoughts, brain dumps, unstructured lists, todos, work items, or errands that need organizing into the OStaaT format. It applies when the user mentions "I need to", "I have to", "I should", pastes a list, describes multiple things to get done, or wants to use the /dump command. It should not be used for general codebase questions, single simple requests, or conversations that do not involve task capture.
 ---
 
 # Task Organization Skill
 
-Organize messy task thoughts into the OStaaP format. When a user mentions tasks or things they need to do, proactively structure them.
+Organize messy task thoughts into the OStaaT format. When a user mentions tasks or things they need to do, proactively structure them.
 
-## OStaaP Task Format
+## OStaaT Task Format
 
 ```markdown
 - 🔴 High ⏰ Now 🔧 45 min 📅 2026-03-05 #project-tag
@@ -109,5 +109,5 @@ Dependency detected from user's input — captured, not invented.
 
 - Read `YYYY-MM-DD-todo.md` — if today's file exists, offer to add tasks
 - Read `PROJECTS.md` and `AREAS.md` — offer to tag tasks
-- Respect `todo-config.json` defaults for priority and timing
+- Respect `ostaat.json` defaults for priority and timing
 - If `git.autoCommit` is enabled, commit after adding tasks

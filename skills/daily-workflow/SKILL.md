@@ -5,7 +5,7 @@ description: This skill should be used when the user starts their day, asks abou
 
 # Daily Workflow Skill
 
-Guide users through effective daily task management, suggesting the right OStaaP commands at the right time.
+Guide users through effective daily task management, suggesting the right OStaaT commands at the right time.
 
 ## Daily Rhythm
 
@@ -47,7 +47,7 @@ When a user asks what to do first:
 
 If the user's daily file has many tasks:
 - Count tasks and total 🔧 time
-- Compare against thresholds from `todo-config.json` (areas.loadThresholds)
+- Compare against thresholds from `ostaat.json` (areas.loadThresholds)
 - If heavy, **present data neutrally**: "You have 12 tasks today totaling ~6 hours"
 - Offer to triage: defer, schedule for later, or mark as 📅 Later
 - **Never say** "you're overwhelmed" or assume emotional state
@@ -66,7 +66,7 @@ If the user's daily file has many tasks:
 - Read `AREAS.md` for recurring items due today and load context
 - Read `PROJECTS.md` for active project deadlines
 - Check `scheduled/` for pre-planned future tasks
-- Reference `todo-config.json` for thresholds and preferences
+- Reference `ostaat.json` for thresholds and preferences
 
 ## Hard Rules
 

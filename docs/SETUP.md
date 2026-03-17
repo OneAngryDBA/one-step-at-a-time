@@ -1,4 +1,4 @@
-# One Step at a Time (OStaaP) — Setup Guide
+# One Step at a Time (OStaaT) — Setup Guide
 
 ## Installation
 
@@ -30,7 +30,7 @@ claude plugin install one-step-at-a-time
 
 ## Configuration
 
-The plugin creates a `todo-config.json` in your working directory. Key settings:
+The plugin creates a `ostaat.json` in your working directory. Key settings:
 
 - **areas.enabled** — Enable area tracking (default: true)
 - **areas.loadCheck** — Show load check when thresholds exceeded (default: true)
@@ -71,5 +71,5 @@ your-project/
 ├── scheduled/                  # Future-dated tasks
 ├── projects-archive/           # Completed projects
 ├── templates/                  # Project & area templates
-└── todo-config.json            # Configuration
+└── ostaat.json            # Configuration
 ```

@@ -238,7 +238,7 @@ Show warnings when:
 
 ## Configuration
 
-Add to `todo-config.json`:
+Add to `ostaat.json`:
 
 ```json
 "dueDates": {
