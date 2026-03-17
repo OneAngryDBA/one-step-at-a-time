@@ -27,7 +27,7 @@ Then restart Claude Code and run `/start-day`.
 |---------|-------------|
 | `/start-day` | Initialize today, roll forward tasks, show reminders |
 | `/dump` | Brain dump thoughts → organized tasks |
-| `/brain-dump` | Alias for `/dump` |
+| `/brain-dump` | Full guided brain dump (see `/dump` for quick capture) |
 | `/add-task` | Add a single task with guided questions |
 | `/review-day` | Mark complete, review upcoming items |
 | `/refine` | Refine existing tasks |

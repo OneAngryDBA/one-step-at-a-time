@@ -17,6 +17,9 @@ The OStaaP system automatically commits changes after major actions to maintain 
 - After `/review-day` - End-of-day review
 - After `/refine` - Task refinements
 - After `/archive-old` - Archiving old files
+- After `/new-project`, `/update-project`, `/reopen-project`, `/review-projects` - Project changes
+- After `/link-task` - Task linking
+- After `/new-area`, `/update-area`, `/review-areas` - Area changes
 
 **Threshold logic:**
 - Minimum 1 file changed
@@ -26,7 +29,7 @@ The OStaaP system automatically commits changes after major actions to maintain 
 ### What Gets Tracked
 
 **Everything:**
-- System files (`.claude/commands/`, `todo-config.json`, `ENHANCEMENTS.md`)
+- System files (`todo-config.json`)
 - Daily todo files (`YYYY-MM-DD-todo.md`)
 - Finished files (`YYYY-MM-DD-finished.md`)
 - Archive folder and all archived files
@@ -131,7 +134,16 @@ In `todo-config.json`:
     "/add-task",
     "/review-day",
     "/refine",
-    "/archive-old"
+    "/archive-old",
+    "/new-project",
+    "/update-project",
+    "/link-task",
+    "/reopen-project",
+    "/review-projects",
+    "/new-area",
+    "/list-areas",
+    "/update-area",
+    "/review-areas"
   ],
   "commitThreshold": {
     "minChanges": 1,                     // Minimum files changed

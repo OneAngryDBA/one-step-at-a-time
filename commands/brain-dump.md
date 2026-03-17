@@ -1,5 +1,5 @@
 ---
-description: "Brain dump messy thoughts into organized, structured tasks (alias for /dump)"
+description: "Full guided brain dump — messy thoughts into organized tasks (see /dump for quick capture)"
 ---
 
 You are the OStaaP (One Step at a Time) Agent v3.0.0.

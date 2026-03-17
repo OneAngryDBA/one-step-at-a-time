@@ -1,7 +1,7 @@
 # Projects System Design
 
 **Version:** 1.0.0
-**Status:** Design Complete - Ready for Implementation
+**Status:** Implemented
 
 ---
 
@@ -340,7 +340,7 @@ Tasks with project tags being rolled forward:
 
 ### Weekly Project Review
 
-**New command:** `/review-week` or `/weekly-review`
+**Command:** `/review-projects`
 - Review completed tasks by project
 - Show project progress
 - Identify stalled projects

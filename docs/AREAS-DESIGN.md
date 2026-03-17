@@ -1,7 +1,7 @@
 # Areas of Responsibility — Design Specification
 
 **Version:** 1.0.0
-**Status:** Design Complete — Implementation In Progress
+**Status:** Implemented
 
 ---
 

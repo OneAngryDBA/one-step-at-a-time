@@ -12,7 +12,7 @@ This document explains how the OStaaP system works from end to end. It is intend
 OStaaP is a markdown-based task management system powered by Claude Code slash commands. There is no application code, no database, no server. Everything is:
 
 - **Markdown files** — human-readable, version-controlled, portable
-- **Claude Code slash commands** — defined in `.claude/commands/`, invoked as `/start-day`, `/dump`, etc.
+- **Claude Code slash commands** — defined in the plugin's `commands/` directory, invoked as `/start-day`, `/dump`, etc.
 - **Git** — automatic commits after every meaningful action
 
 Claude Code acts as both the engine and the interface. You talk to it, it reads and writes markdown files, and commits the changes.
