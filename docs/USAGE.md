@@ -25,6 +25,95 @@ See the [full command list](#all-commands) below.
 
 ---
 
+## Daily Planning Flow
+
+The daily workflow follows a three-phase rhythm: **start, work, review**. Each phase reads from and writes to shared markdown files.
+
+```mermaid
+flowchart TD
+    subgraph Morning["Phase 1: /start-day"]
+        direction TB
+        M1["Check for existing\ntoday's files"]
+        M2["Roll forward incomplete\ntasks from yesterday"]
+        M3["Pull scheduled tasks\nfrom scheduled/ folder"]
+        M4["Check overdue tasks\nwith past due dates"]
+        M5["Show active projects\nfrom PROJECTS.md"]
+        M6["Area reminders\nHabits | Maintenance | Obligations"]
+        M7{"Load check:\nexceeds thresholds?"}
+        M8["Triage options:\nDefer / Move to tomorrow\n/ Proceed as-is"]
+        M9["Day ready"]
+
+        M1 --> M2 --> M3 --> M4 --> M5 --> M6 --> M7
+        M7 -->|Yes| M8 --> M9
+        M7 -->|No| M9
+    end
+
+    subgraph MidDay["Phase 2: During the Day"]
+        direction TB
+        D1["/dump\nPaste messy text\nget structured tasks"]
+        D2["/add-task\nSingle task with\nguided questions"]
+        D3["Natural language\nTask-organization\nskill activates"]
+        D4["/allocate-time\nMap tasks to\ncalendar slots"]
+    end
+
+    subgraph Evening["Phase 3: /review-day"]
+        direction TB
+        E1["Show today's task list"]
+        E2["Mark tasks complete\nMove to finished file"]
+        E3["Check overdue &\ndue-today tasks"]
+        E4["Show upcoming\ndue dates"]
+        E5["Update AREAS.md\nLast dates for\ncompleted recurring items"]
+        E6["Show tomorrow's\nrecurring items"]
+        E7["Day complete"]
+
+        E1 --> E2 --> E3 --> E4 --> E5 --> E6 --> E7
+    end
+
+    subgraph Files["Data Files"]
+        direction LR
+        TODO["Today's Todo\nYYYY-MM-DD-todo.md"]
+        DONE["Today's Finished\nYYYY-MM-DD-finished.md"]
+        AREAS["AREAS.md\nRecurring items\nwith cadences"]
+        PROJ["PROJECTS.md\nActive projects\nwith progress"]
+        SCHED["scheduled/\nFuture tasks"]
+        YESTERDAY["Yesterday's Todo\nYYYY-MM-DD-todo.md"]
+    end
+
+    YESTERDAY -.->|"incomplete tasks"| M2
+    SCHED -.->|"today's scheduled"| M3
+    AREAS -.->|"due items"| M6
+    PROJ -.->|"active projects"| M5
+    M9 ==>|"creates"| TODO
+    M9 ==>|"creates"| DONE
+
+    D1 & D2 & D3 -->|"add tasks"| TODO
+    D4 -.->|"reads"| TODO
+
+    TODO -.->|"reads"| E1
+    E2 ==>|"moves completed"| DONE
+    E5 ==>|"updates Last dates"| AREAS
+    E6 -.->|"reads"| AREAS
+
+    style Morning fill:#e8f5e9,stroke:#2e7d32
+    style MidDay fill:#e3f2fd,stroke:#1565c0
+    style Evening fill:#f3e5f5,stroke:#7b1fa2
+    style Files fill:#fff8e1,stroke:#f9a825
+    style TODO fill:#a5d6a7,stroke:#2e7d32
+    style DONE fill:#90a4ae,stroke:#546e7a
+    style AREAS fill:#90caf9,stroke:#1565c0
+    style PROJ fill:#ffcc80,stroke:#ef6c00
+    style SCHED fill:#fff59d,stroke:#f9a825
+    style YESTERDAY fill:#ce93d8,stroke:#7b1fa2
+```
+
+**Reading the diagram:**
+- **Dashed arrows** = reads from a file
+- **Thick arrows** = creates or writes to a file
+- The cycle between AREAS.md and the phases is key: `/start-day` reads it for reminders, `/review-day` writes back completion dates
+- All mid-day capture methods (slash commands and natural language) converge on a single file — today's todo
+
+---
+
 ## Natural Language
 
 OStaaT includes 5 proactive skills that respond to natural language. When you talk about tasks, planning, or life management, Claude recognizes the intent and either helps directly or suggests the right slash command.
