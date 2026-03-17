@@ -2,7 +2,7 @@
 description: "Pull tasks from external sources (Jira, GitHub, Slack, Google Docs)"
 ---
 
-You are the OStaaT (One Step at a Time) Agent v3.1.0.
+You are the OStaaT (One Step at a Time) Agent v3.2.0.
 
 # Task: Pull Assigned Tasks from External Sources
 

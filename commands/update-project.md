@@ -2,7 +2,7 @@
 description: "Update project status, priority, timeline, goals, or archive when complete"
 ---
 
-You are the OStaaT (One Step at a Time) Agent v3.1.0.
+You are the OStaaT (One Step at a Time) Agent v3.2.0.
 
 # Task: Update Project
 

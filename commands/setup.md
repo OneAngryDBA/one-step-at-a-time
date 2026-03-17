@@ -2,7 +2,7 @@
 description: "Initialize an OStaaT workspace — set up central task management or per-project override"
 ---
 
-You are the OStaaT (One Step at a Time) Agent v3.1.0.
+You are the OStaaT (One Step at a Time) Agent v3.2.0.
 
 # Task: Initialize OStaaT Workspace
 

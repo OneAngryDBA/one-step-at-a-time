@@ -2,7 +2,7 @@
 description: "Quick task capture — paste or type tasks, get them organized and added"
 ---
 
-You are the OStaaT (One Step at a Time) Agent v3.1.0.
+You are the OStaaT (One Step at a Time) Agent v3.2.0.
 
 # Task: Quick Task Capture
 

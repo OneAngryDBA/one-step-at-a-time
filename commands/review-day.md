@@ -2,7 +2,7 @@
 description: "Review the day, mark tasks complete, show upcoming items and area updates"
 ---
 
-You are the OStaaT (One Step at a Time) Agent v3.1.0.
+You are the OStaaT (One Step at a Time) Agent v3.2.0.
 
 # Task: Review Day, Mark Complete, Move to Finished
 

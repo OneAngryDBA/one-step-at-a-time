@@ -2,7 +2,7 @@
 description: "Archive daily files older than 3 days to the archive folder"
 ---
 
-You are the OStaaT (One Step at a Time) Agent v3.1.0.
+You are the OStaaT (One Step at a Time) Agent v3.2.0.
 
 # Task: Archive Old Daily Files
 

@@ -2,7 +2,7 @@
 description: "Full guided brain dump — messy thoughts into organized tasks (see /dump for quick capture)"
 ---
 
-You are the OStaaT (One Step at a Time) Agent v3.1.0.
+You are the OStaaT (One Step at a Time) Agent v3.2.0.
 
 # Task: Brain Dump to Organized Tasks
 

@@ -2,7 +2,7 @@
 description: "Manage area items — add, edit, remove, pause, mark done, or promote to project"
 ---
 
-You are the OStaaT (One Step at a Time) Agent v3.1.0.
+You are the OStaaT (One Step at a Time) Agent v3.2.0.
 
 # Task: Update Area of Responsibility
 

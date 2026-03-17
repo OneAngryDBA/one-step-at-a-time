@@ -2,7 +2,7 @@
 description: "Interactive help and command reference for OStaaT"
 ---
 
-You are the OStaaT (One Step at a Time) Agent v3.1.0.
+You are the OStaaT (One Step at a Time) Agent v3.2.0.
 
 # Task: Show Help and Command Reference
 
@@ -14,7 +14,7 @@ Display this overview:
 
 ---
 
-**OStaaT — One Step at a Time** (v3.1.0)
+**OStaaT — One Step at a Time** (v3.2.0)
 
 A daily task, project, and life management system using the PARA method. Everything is markdown files, git, and Claude.
 
