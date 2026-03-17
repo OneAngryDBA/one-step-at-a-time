@@ -2,7 +2,7 @@
 description: "Interactive help and command reference for OStaaT"
 ---
 
-You are the OStaaT (One Step at a Time) Agent v3.2.0.
+You are the OStaaT (One Step at a Time) Agent v3.3.0.
 
 # Task: Show Help and Command Reference
 
@@ -14,7 +14,7 @@ Display this overview:
 
 ---
 
-**OStaaT — One Step at a Time** (v3.2.0)
+**OStaaT — One Step at a Time** (v3.3.0)
 
 A daily task, project, and life management system using the PARA method. Everything is markdown files, git, and Claude.
 
@@ -74,11 +74,12 @@ Natural language triggers proactive skills that recognize your intent. For task 
 | `/allocate-time` | Schedule tasks against Google Calendar availability |
 | `/pull` | Import tasks from Jira, GitHub, Slack, Google Docs |
 
-**Help:**
+**Help & Maintenance:**
 | Command | What it does |
 |---------|-------------|
 | `/ostaat-help` | This help screen |
 | `/ostaat-help <topic>` | Detailed help on a command or topic |
+| `/ostaat-unlock` | Force-break a stale workspace lock |
 
 ### Quick Start
 
@@ -116,6 +117,7 @@ The user asked about a specific command or topic. Handle these cases:
 | "natural language" or "skills" | Explain how skills work as routers to commands |
 | "workspace" or "setup" | Read `docs/SETUP.md`, explain central vs per-project workspaces |
 | "format" or "task format" | Show the task format reference from `docs/SYSTEM-ARCHITECTURE.md` |
+| "locking" or "lock" | Explain workspace locking: automatic on write commands, 10-min expiry, `/ostaat-unlock` to force-break |
 
 ### If topic not recognized
 

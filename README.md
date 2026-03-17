@@ -40,7 +40,7 @@ OStaaT installs globally and uses a **central workspace** — a single directory
 
 Run `/setup` to configure.
 
-## Commands (21)
+## Commands (22)
 
 ### Setup
 | Command | Description |
@@ -82,10 +82,11 @@ Run `/setup` to configure.
 | `/allocate-time` | Schedule against Google Calendar |
 | `/pull` | Pull from Jira, GitHub, Slack |
 
-### Help
+### Help & Maintenance
 | Command | Description |
 |---------|-------------|
 | `/ostaat-help` | Interactive help and command reference |
+| `/ostaat-unlock` | Force-break a stale workspace lock |
 
 ## Skills (6)
 

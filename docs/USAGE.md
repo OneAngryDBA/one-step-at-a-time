@@ -155,6 +155,39 @@ Skills are **routers, not replacements**. They recognize your intent and guide y
 
 ---
 
+## Workspace Locking
+
+OStaaT uses a central workspace that multiple Claude Code sessions can access simultaneously. To prevent data corruption from concurrent writes, the system uses **advisory file locking**.
+
+### How it works
+
+- **Write commands** (like `/start-day`, `/dump`, `/review-day`) automatically acquire a lock before writing and release it when done.
+- **Read-only commands** (`/list-projects`, `/list-areas`, `/ostaat-help`) never lock — they're always safe to run.
+- The lock file is `{workspace_root}/.ostaat.lock` — it contains a session identifier and timestamp.
+
+### What happens with conflicts
+
+If you run a write command while another Claude session holds the lock:
+```
+🔒 Workspace is locked by another session.
+Locked by: /dump at 2026-03-17T14:30:00Z (from ~/code/my-project)
+Lock age: 3 minutes
+```
+
+The command will not proceed. Wait for the other session to finish, or force-break with `/ostaat-unlock`.
+
+### Stale locks
+
+Locks auto-expire after **10 minutes**. If a session crashes without releasing its lock, the next command will detect the stale lock and auto-break it. You can also manually break a lock with `/ostaat-unlock --force`.
+
+### Important notes
+
+- The lock file is in `.gitignore` — it's never committed
+- Long interactive commands (like `/start-day` which asks several questions) refresh the lock timestamp to prevent false expiry
+- If you frequently hit lock conflicts, consider keeping OStaaT work in one Claude session at a time
+
+---
+
 ## Getting Help
 
 - Run `/ostaat-help` for an interactive overview of all commands and skills
@@ -205,7 +238,8 @@ Skills are **routers, not replacements**. They recognize your intent and guide y
 | `/allocate-time` | Schedule against Google Calendar |
 | `/pull` | Pull from Jira, GitHub, Slack |
 
-### Help
+### Help & Maintenance
 | Command | Description |
 |---------|-------------|
 | `/ostaat-help` | Interactive help and command reference |
+| `/ostaat-unlock` | Force-break a stale workspace lock |

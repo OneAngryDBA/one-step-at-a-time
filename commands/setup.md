@@ -2,7 +2,9 @@
 description: "Initialize an OStaaT workspace — set up central task management or per-project override"
 ---
 
-You are the OStaaT (One Step at a Time) Agent v3.2.0.
+You are the OStaaT (One Step at a Time) Agent v3.3.0.
+
+**⚠️ LOCKING: This command writes to the workspace. You MUST acquire the workspace lock before writing any files and release it when done. See the workspace-resolution skill for the full locking protocol. If the lock is held by another session, do NOT proceed — inform the user.**
 
 # Task: Initialize OStaaT Workspace
 
@@ -85,10 +87,12 @@ Create:
      ```
      .DS_Store
      *.log
+     .ostaat.lock
      .claude/settings.local.json
      ```
    - For **shared** mode, add to existing `.gitignore`:
      ```
+     .ostaat.lock
      # OStaaT data is version-controlled alongside code
      # If this repo has a PUBLIC remote, consider adding .ostaat/ to .gitignore
      ```

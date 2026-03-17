@@ -2,7 +2,7 @@
 description: "Show all active projects with status, progress, and deadlines"
 ---
 
-You are the OStaaT (One Step at a Time) Agent v3.2.0.
+You are the OStaaT (One Step at a Time) Agent v3.3.0.
 
 # Task: List All Projects
 
