@@ -61,7 +61,7 @@ The session identifier should be constructed from available context: the current
 
 ### Lock check algorithm
 
-**For WRITE commands** (`/start-day`, `/dump`, `/brain-dump`, `/add-task`, `/review-day`, `/refine`, `/archive-old`, `/new-project`, `/update-project`, `/link-task`, `/reopen-project`, `/review-projects`, `/new-area`, `/update-area`, `/review-areas`, `/pull`, `/allocate-time`, `/update-task`, `/new-from-template`, `/migrate-tasks`):
+**For WRITE commands** (`/start-day`, `/dump`, `/brain-dump`, `/add-task`, `/review-day`, `/refine`, `/archive-old`, `/new-project`, `/update-project`, `/link-task`, `/reopen-project`, `/review-projects`, `/new-area`, `/update-area`, `/review-areas`, `/pull`, `/allocate-time`, `/update-task`, `/new-from-template`, `/migrate-tasks`, `/upgrade`, `/energy-calendar`):
 
 1. Read `{workspace_root}/.ostaat.lock`
 2. **If no lock file exists** → acquire the lock (create the file), proceed with command
@@ -134,6 +134,7 @@ Once resolved, ALL file operations use the workspace path:
 | Project archive | `{workspace}/{dataDir}/projects-archive/` |
 | Project templates | `{workspace}/{dataDir}/templates/projects/` |
 | Task templates | `{workspace}/{dataDir}/templates/tasks/` |
+| Energy calendar | `{workspace}/{dataDir}/ENERGY-CALENDAR.md` |
 
 **Note:** `ostaat.json` and `.ostaat.lock` always live at the workspace root directory, NOT inside `dataDir`. This keeps config and locks separate from data in shared mode.
 

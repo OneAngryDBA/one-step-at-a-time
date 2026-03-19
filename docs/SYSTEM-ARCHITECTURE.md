@@ -429,6 +429,35 @@ Not all recurring items are created equal. The three-tier system reflects realit
 
 ---
 
+## 8. Energy Calendar & Capacity Planning
+
+The energy calendar adds time-aware scheduling. It defines when you have capacity for different types of work, scoped to areas.
+
+### How it works
+
+- **Energy dimensions** are user-defined work categories (🧠 Deep, ⚡ Admin, 🎨 Creative, 🤝 Social)
+- **Energy blocks** are time slots in `ENERGY-CALENDAR.md` with weekly defaults and date overrides
+- Each block has an energy type and area scope: `09:00-12:00 🧠 Deep @work`
+- **Area scoping** means a `@work` block serves `@work`, `@work/engineering`, etc.
+
+### Integration points
+
+| Command | Energy feature |
+|---------|---------------|
+| `/start-day` | Shows energy budget, fit indicators during focus selection, constraint warnings |
+| `/allocate-time` | Matches tasks to blocks by energy type and area, proposes schedule |
+| `/review-day` | Energy usage report (utilization by type) |
+| `/energy-calendar` | View and edit weekly defaults, add overrides, capacity overview |
+| `/add-task`, `/dump` | Suggest energy labels from configured dimensions |
+
+### Constraint engine
+
+For tasks with due dates, the system works backward through available energy blocks to determine the latest viable start date. If capacity is insufficient, it flags the shortfall before you're surprised.
+
+See `docs/ENERGY-DESIGN.md` for the full specification.
+
+---
+
 ## Task Format Reference
 
 ```markdown
@@ -508,7 +537,8 @@ Not all recurring items are created equal. The three-tier system reflects realit
 ### External Integrations
 | Command | Purpose |
 |---------|---------|
-| `/allocate-time` | Schedule tasks against Google Calendar availability |
+| `/allocate-time` | Schedule tasks against energy blocks and Google Calendar |
+| `/energy-calendar` | View and manage energy calendar (weekly defaults, overrides) |
 | `/pull` | Import tasks from Jira, GitHub, Slack, Google Docs |
 
 ### Help & Maintenance

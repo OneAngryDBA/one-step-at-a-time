@@ -187,6 +187,12 @@ Also add new commands to `git.commitOnActions`:
 - If yes, follow the energy setup flow from `/setup` Step 3
 - If no, leave `energy.dimensions` empty (can be added later)
 
+**Ask about energy calendar:**
+If energy dimensions were configured:
+"Want to set up an energy calendar? This defines your weekly schedule — when you have time for each type of work."
+- If yes, run `/energy-calendar` Initial Setup Flow → creates `ENERGY-CALENDAR.md`, sets `energy.enabled: true`
+- If no, set `energy.enabled: false` (calendar can be created later with `/energy-calendar`)
+
 ### Phase 2: Directory creation
 
 Create the task store directory structure:
@@ -220,6 +226,7 @@ Ask: "Want to migrate existing tasks from your daily files into the task store n
   - Added tasks, energy, templates sections
   - Added areas.hierarchyEnabled
   - Energy dimensions: configured (4 labels) | skipped
+  - Energy calendar: ENERGY-CALENDAR.md (enabled) | skipped
 
   New directories:
   - tasks/ — persistent task store with 5 status files + INDEX.md
@@ -232,11 +239,14 @@ Ask: "Want to migrate existing tasks from your daily files into the task store n
   - /update-task — change task status
   - /new-from-template — create from templates
   - /migrate-tasks — import from daily files (run anytime)
+  - /energy-calendar — manage your energy schedule
+  - /upgrade — this command (for future upgrades)
 
   Changed behavior:
-  - /start-day now reads from the task store (no more rolling forward)
+  - /start-day reads from the task store with energy-aware focus selection
   - /dump, /add-task write to the task store with auto IDs
-  - /review-day marks done in the task store
+  - /review-day marks done in the task store with energy usage report
+  - /allocate-time matches tasks to energy blocks
   - Daily files are generated views, not the source of truth
 
   Next: Run /start-day to try the new focus selection flow.

@@ -1,7 +1,7 @@
 {
   "name": "one-step-at-a-time",
   "version": "4.0.0",
-  "description": "Comprehensive daily task, project, and life management system using the PARA method. Persistent task store with lifecycle states, subtasks, and task IDs. Unified templates for reusable workflows. Area hierarchy with sub-areas. Energy-aware planning (Phase 2). 27 slash commands, 6 proactive skills, workspace locking, and recurring items with consequence tracking.",
+  "description": "Comprehensive daily task, project, and life management system using the PARA method. Persistent task store with lifecycle states, subtasks, and task IDs. Unified templates for reusable workflows. Area hierarchy with sub-areas. Energy-aware planning (Phase 2). 28 slash commands, 6 proactive skills, workspace locking, and recurring items with consequence tracking.",
   "author": {
     "name": "Matt Brennan"
   }

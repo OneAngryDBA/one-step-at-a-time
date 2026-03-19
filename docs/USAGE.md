@@ -287,7 +287,8 @@ Locks auto-expire after **10 minutes**. Stale locks are auto-broken. Manual brea
 ### Integrations
 | Command | Description |
 |---------|-------------|
-| `/allocate-time` | Schedule against Google Calendar |
+| `/allocate-time` | Schedule against energy blocks and calendar |
+| `/energy-calendar` | Manage energy calendar |
 | `/pull` | Pull from Jira, GitHub, Slack |
 
 ### Help & Maintenance

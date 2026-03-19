@@ -139,25 +139,57 @@ Ask: "Add any of these to today's tasks?"
 
 Present the combined view of tasks available for today:
 
+### 7a: Show energy budget (if `energy.enabled`)
+
+Read `ENERGY-CALENDAR.md` and resolve today's blocks (weekly default + overrides):
+
+```
+📊 Today's Energy Budget (Thursday):
+- 🧠 Deep @work: 3.0 hrs (09:00-12:00)
+- 🤝 Social @work: 1.5 hrs (13:00-14:30)
+- ⚡ Admin @work: 2.5 hrs (14:30-17:00)
+- ⚡ Admin @home: 1.0 hr (18:00-19:00)
+Total: 8.0 hrs
+```
+
+If Google Calendar MCP is available, show conflicts:
+```
+Calendar conflicts:
+- 13:00-13:30 Team standup → 🤝 Social reduced to 1.0 hr
+- 15:00-15:30 Client call → ⚡ Admin reduced to 2.0 hrs
+Adjusted total: 7.0 hrs
+```
+
+### 7b: Focus selection with energy fit indicators
+
 ```
 📋 Select today's focus:
 
 Already in progress (auto-selected):
-  ✅ [t-017] 🔴 High 🔧 45 min #api-redesign — API refactoring
+  ✅ [t-017] 🔴 High 🔧 45 min 🧠 Deep #api-redesign — API refactoring → fits 🧠 @work
   ✅ [t-030] 🔴 High 🔧 120 min #monthly-close — Financial close (1/4)
+     - [t-031] 🔧 30 min ⚡ Admin → fits ⚡ @work
+     - [t-032] 🔧 30 min 🧠 Deep → fits 🧠 @work
+     - [t-033] 🔧 20 min ⚡ Admin → fits ⚡ @work
+     - [t-034] 🔧 15 min ⚡ Admin → fits ⚡ @work
 
 Ready — highlighted (lead time / due soon):
-  ☐ [t-035] 🟡 Medium 🔧 60 min — Update docs (due in 2 days)
-  ☐ [t-040] 🔴 High 🔧 30 min — Prepare quarterly review (start date: today)
+  ☐ [t-035] 🟡 Medium 🔧 60 min ⚡ Admin — Update docs → fits ⚡ @work
+  ☐ [t-040] 🔴 High 🔧 30 min 🧠 Deep — Quarterly review → fits 🧠 @work
 
 Ready — backlog:
-  ☐ [t-036] 🟢 Low 🔧 15 min — Clean up test files
-  ☐ [t-038] 🟡 Medium 🔧 30 min @health — Annual physical prep
+  ☐ [t-036] 🟢 Low 🔧 15 min ⚡ Admin — Clean up test files → fits ⚡ @work
+  ☐ [t-055] 🟡 Medium 🔧 60 min 🎨 Creative @personal — Write blog post → ⚠️ no 🎨 block today
   ...
 
 Area items added:
-  ☐ [t-048] 🟡 Medium 🔧 20 min @home — Vacuum house
+  ☐ [t-048] 🟡 Medium 🔧 20 min ⚡ Admin @home — Vacuum house → fits ⚡ @home
 ```
+
+Energy fit indicators (if `energy.enabled` and `energy.warnOnNoMatchingBlock`):
+- `→ fits TYPE @area` — there's a matching block with capacity
+- `→ ⚠️ no TYPE block today` — no matching block; task won't fit unless user adds one
+- `→ ⚠️ over capacity` — matching block exists but total tasks exceed its time
 
 Ask: "Confirm today's focus? (select/deselect by ID, or 'confirm' to proceed)"
 
@@ -231,6 +263,50 @@ Options:
 
 If no thresholds exceeded, don't display anything.
 
+## Step 11b: Energy capacity check (if `energy.enabled`)
+
+After focus selection, check energy allocation against today's budget:
+
+```
+📊 Energy Allocation:
+🧠 Deep @work:    2.1 / 3.0 hrs (45 + 30 + 30 + 30 min selected) — 54 min remaining
+🤝 Social @work:  0.0 / 1.5 hrs — fully available
+⚡ Admin @work:   1.6 / 2.5 hrs (65 + 20 + 15 min selected) — 54 min remaining
+⚡ Admin @home:   0.3 / 1.0 hr (20 min selected) — 40 min remaining
+🎨 Creative:      not scheduled today
+```
+
+If any energy type is over capacity:
+```
+⚠️ Over capacity:
+- 🧠 Deep @work: 4.0 hrs selected but only 3.0 hrs available
+  Consider moving some 🧠 Deep tasks to tomorrow or extending the block
+
+Options:
+- Move tasks back to ready
+- Add an energy block override for today (/energy-calendar override today)
+- Proceed as-is (you'll just run over)
+```
+
+## Step 11c: Constraint check (if `energy.constraintCheckOnStartDay`)
+
+For all tasks with due dates in the task store (not just today's focus), run the constraint engine:
+
+```
+⚠️ Deadline risks:
+- [t-050] Security audit — due Mar 25
+  Needs: 🧠 Deep @work — 480 min (8 hrs)
+  Available 🧠 Deep @work (now through Mar 25): 360 min (6 hrs)
+  Shortfall: 120 min — need to add blocks or extend deadline
+
+- [t-060] Client proposal — due Mar 28
+  Needs: 🎨 Creative @work — 240 min (4 hrs)
+  Available 🎨 Creative @work: 0 min (no @work creative blocks!)
+  Suggestion: Add 🎨 Creative @work blocks or reassign energy type
+```
+
+For tasks with no issues, don't display anything. Only surface problems.
+
 ## Step 12: Summary
 
 ```
@@ -239,10 +315,12 @@ If no thresholds exceeded, don't display anything.
   Focus: 5 tasks (🔧 ~4.2 hrs)
   In progress: 5 | Ready: 8 | Waiting: 2 | Inbox: 1
   Area reminders: 3 items surfaced
+  Energy: 🧠 2.1h 🤝 0h ⚡ 1.9h of 8.0h budget
+  Deadline risks: 1 task flagged
   Files: 2026-03-19-todo.md, 2026-03-19-finished.md
 
   Use /dump to add tasks, /update-task to change status,
-  /review-day when you're done.
+  /energy-calendar to adjust blocks, /review-day when you're done.
 ```
 
 **Philosophy:** The task store does the heavy lifting. No more rolling forward — tasks persist. Focus selection replaces copy-paste carry-over. You pick what matters today from your full backlog.

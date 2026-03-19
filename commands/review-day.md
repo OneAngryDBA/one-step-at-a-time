@@ -126,6 +126,25 @@ Ask: "Ready for tomorrow's deadlines?"
 ## Step 8: Summary
 
 Report:
+### Energy usage report (if `energy.enabled` and `energy.showUsageAtReviewDay`)
+
+Read today's energy blocks from `ENERGY-CALENDAR.md` and compare against completed task energy:
+
+```
+📊 Energy Usage Today:
+🧠 Deep @work:    2.5 / 3.0 hrs (83%)  ████████░░
+🤝 Social @work:  1.0 / 1.5 hrs (67%)  ██████░░░░
+⚡ Admin @work:   2.0 / 2.5 hrs (80%)  ████████░░
+⚡ Admin @home:   0.3 / 1.0 hr  (33%)  ███░░░░░░░
+🎨 Creative:      not scheduled today
+
+Overall: 5.8 / 8.0 hrs utilized (73%)
+```
+
+This helps users see their energy patterns over time — are they consistently underusing Social blocks? Overloading Deep blocks?
+
+### Summary
+
 ```
 📊 Day Review:
 
@@ -134,6 +153,7 @@ Report:
   Moved to waiting: 1 task
   Overdue handled: 2 tasks rescheduled
   Area items updated: @home (vacuum), @health (exercise 3/4)
+  Energy utilization: 73% (5.8 / 8.0 hrs)
   Upcoming: 3 due tomorrow, 2 this week
 
   Task store: 10 open | 2 in-progress | 5 ready | 2 waiting | 1 inbox

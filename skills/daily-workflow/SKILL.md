@@ -68,12 +68,22 @@ If the user's task store shows many in-progress tasks:
 - **After 4pm**: If user seems to be wrapping up, suggest `/review-day`
 - **Weekend**: Lighter touch — suggest `/review-areas` if not reviewed in the past 7 days, or `/review-projects` for weekly check-in
 
+## Energy Awareness
+
+When `energy.enabled` is true:
+- Reference today's energy blocks from `ENERGY-CALENDAR.md` when helping prioritize
+- Suggest tasks that match the current time block's energy type: "It's 2pm — you're in an ⚡ Admin @work block. How about [t-031] Pull bank statements?"
+- If a task doesn't match any block today, note it: "That's a 🎨 Creative task — you don't have a creative block today. Add one with `/energy-calendar override today`, or save it for a day that has one."
+- Suggest `/allocate-time` when the user has many tasks and wants help scheduling
+- At end of day, the energy usage report shows utilization patterns
+
 ## Integration Points
 
 - Read `tasks/in-progress.md` to assess today's focus tasks
 - Read `tasks/ready.md` to know what's available
 - Read `tasks/waiting.md` for blocked items
 - Read `tasks/INDEX.md` for quick lookups
+- Read `ENERGY-CALENDAR.md` for today's energy blocks and capacity
 - Read `YYYY-MM-DD-todo.md` as the daily working view
 - Read `YYYY-MM-DD-finished.md` to see what's been accomplished
 - Read `AREAS.md` for recurring items due today and load context

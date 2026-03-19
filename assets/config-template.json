@@ -11,7 +11,12 @@
   },
   "energy": {
     "enabled": false,
-    "dimensions": []
+    "dimensions": [],
+    "calendarFile": "ENERGY-CALENDAR.md",
+    "showBudgetAtStartDay": true,
+    "showUsageAtReviewDay": true,
+    "warnOnNoMatchingBlock": true,
+    "constraintCheckOnStartDay": true
   },
   "templates": {
     "folder": "templates/tasks",
@@ -100,7 +105,8 @@
       "/update-task",
       "/new-from-template",
       "/migrate-tasks",
-      "/upgrade"
+      "/upgrade",
+      "/energy-calendar"
     ],
     "commitThreshold": {
       "minChanges": 1,

@@ -36,7 +36,7 @@ A daily task, project, and life management system using the PARA method. Persist
 - "I'm wrapping up for today" → end-of-day review suggested
 - "Show me my waiting tasks" → task store query
 
-### All Commands (27)
+### All Commands (28)
 
 **Setup:** `/setup`
 
@@ -82,10 +82,11 @@ A daily task, project, and life management system using the PARA method. Persist
 | `/upgrade` | Upgrade workspace from any previous version to latest |
 | `/migrate-tasks` | Extract tasks from daily files into task store |
 
-**Integrations:**
+**Integrations & Energy:**
 | Command | What it does |
 |---------|-------------|
-| `/allocate-time` | Schedule tasks against Google Calendar availability |
+| `/allocate-time` | Schedule tasks against energy blocks and Google Calendar |
+| `/energy-calendar` | View and manage energy calendar (weekly defaults, overrides, capacity) |
 | `/pull` | Import tasks from Jira, GitHub, Slack, Google Docs |
 
 **Help & Maintenance:**
@@ -135,7 +136,7 @@ The user asked about a specific command or topic. Handle these cases:
 | "workspace" or "setup" | Read `docs/SETUP.md`, explain central vs per-project workspaces |
 | "format" or "task format" | Show the v4.0 task format with IDs from `docs/TASKS-DESIGN.md` |
 | "locking" or "lock" | Explain workspace locking: automatic on write commands, 10-min expiry |
-| "energy" | Explain energy dimensions (Phase 2), labels stored now but not enforced |
+| "energy" | Read `docs/ENERGY-DESIGN.md`, explain energy calendar, blocks, area scoping, constraint engine |
 | "migration" | Explain v3→v4 migration with `/migrate-tasks` |
 
 ### If topic not recognized

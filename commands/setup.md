@@ -76,7 +76,22 @@ Ask: "OStaaT can track energy types for tasks (e.g., 🧠 Deep focus, ⚡ Admin,
 **If no:**
 - Leave `energy.dimensions` empty, proceed
 
-Note: Energy labels are stored but NOT enforced until Phase 2. They appear as optional metadata on tasks.
+Note: Energy labels are stored on tasks regardless. If you also set up an energy calendar, the system will show capacity budgets, flag infeasibility, and help schedule tasks to matching blocks.
+
+## Step 3b: Energy Calendar (Optional)
+
+If energy dimensions were configured in Step 3, ask:
+"Want to set up an energy calendar? This defines your typical weekly schedule — when you have time for each type of work."
+
+**If yes:**
+- Run the Initial Setup Flow from `/energy-calendar` (guided questions about work hours, lunch, morning/afternoon energy types, weekends, area scoping)
+- This creates `ENERGY-CALENDAR.md` in the dataDir
+- Set `energy.enabled: true` in config
+
+**If no:**
+- Skip calendar creation. Energy labels will be stored on tasks but no capacity checks or scheduling.
+- Set `energy.enabled: false` in config
+- User can run `/energy-calendar` later to set it up
 
 ## Step 4: Create Workspace Files
 
@@ -87,6 +102,8 @@ Copy the plugin's `assets/config-template.json` to `ostaat.json` in the repo roo
 - Set `mode` and `dataDir` based on Step 2 choice
 - Set `git.privateRemote: true`
 - Set `energy.dimensions` based on Step 3 (if configured)
+- Set `energy.enabled` based on Step 3b (true if calendar created, false otherwise)
+- Set `energy.calendarFile: "ENERGY-CALENDAR.md"` if calendar created
 - Set `tasks.nextId: 1`
 
 ### 4b: Data Files (in dataDir)
@@ -176,7 +193,7 @@ Personal task management workspace powered by [One Step at a Time](https://githu
 - `/review-day` — End-of-day review
 - `/list-tasks` — See all open tasks
 
-See the [full documentation](https://github.com/OneAngryDBA/one-step-at-a-time) for all 27 commands.
+See the [full documentation](https://github.com/OneAngryDBA/one-step-at-a-time) for all 28 commands.
 ```
 
 If mode is **shared**, skip the README (the repo likely has its own).
@@ -256,6 +273,7 @@ After setup, show:
   Config:          ostaat.json
   Task store:      tasks/ (INDEX.md + 5 status files)
   Energy labels:   configured (4 labels) | skipped
+  Energy calendar: ENERGY-CALENDAR.md (enabled) | skipped
   Data files:      AREAS.md, PROJECTS.md
 
   Next steps:
