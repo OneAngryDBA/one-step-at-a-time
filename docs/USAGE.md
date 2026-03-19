@@ -9,16 +9,18 @@ OStaaT gives you two ways to interact: **slash commands** and **natural language
 Slash commands are the primary interface. Each one loads a structured prompt that tells Claude exactly what to do — which files to read, what to write, what questions to ask, and what format to use.
 
 ```
-/start-day          → Initialize today, roll forward tasks, show reminders
-/dump               → Quick task capture from messy input
-/add-task           → Add a single task with guided questions
-/review-day         → Mark tasks complete, update areas, show upcoming
-/refine             → Break down or reprioritize existing tasks
+/start-day          → Read task store, select focus, generate daily file
+/dump               → Quick task capture → task store with IDs
+/add-task           → Single task with guided questions → task store
+/review-day         → Mark done in task store, update areas, show upcoming
+/refine             → Break down into subtasks with IDs, adjust details
+/list-tasks         → Query task store by status, project, area
+/update-task        → Change task status, move between lifecycle states
 ```
 
 **When to use slash commands:**
 - You want a specific, repeatable workflow
-- You need the full feature set (load checks, area reminders, git commits)
+- You need the full feature set (task IDs, store sync, git commits)
 - You want consistent behavior every time
 
 See the [full command list](#all-commands) below.
@@ -27,90 +29,93 @@ See the [full command list](#all-commands) below.
 
 ## Daily Planning Flow
 
-The daily workflow follows a three-phase rhythm: **start, work, review**. Each phase reads from and writes to shared markdown files.
+The daily workflow follows a three-phase rhythm: **start, work, review**. The **task store** (`tasks/` directory) is the source of truth throughout.
 
 ```mermaid
 flowchart TD
     subgraph Morning["Phase 1: /start-day"]
         direction TB
-        M1["Check for existing\ntoday's files"]
-        M2["Roll forward incomplete\ntasks from yesterday"]
-        M3["Pull scheduled tasks\nfrom scheduled/ folder"]
+        M1["Read task store\nin-progress + ready\n+ waiting + inbox"]
+        M2["Pull scheduled tasks\n→ assign IDs → store"]
+        M3["Triage inbox items\nassign priority/timing"]
         M4["Check overdue tasks\nwith past due dates"]
         M5["Show active projects\nfrom PROJECTS.md"]
-        M6["Area reminders\nHabits | Maintenance | Obligations"]
-        M7{"Load check:\nexceeds thresholds?"}
-        M8["Triage options:\nDefer / Move to tomorrow\n/ Proceed as-is"]
-        M9["Day ready"]
+        M6["Area reminders\nHabits | Maintenance\nObligations + templates"]
+        M7["Focus selection\nPick today's tasks"]
+        M8{"Load check:\nexceeds thresholds?"}
+        M9["Triage: move back\nto ready / proceed"]
+        M10["Generate daily file\nfrom selected tasks"]
 
-        M1 --> M2 --> M3 --> M4 --> M5 --> M6 --> M7
-        M7 -->|Yes| M8 --> M9
-        M7 -->|No| M9
+        M1 --> M2 --> M3 --> M4 --> M5 --> M6 --> M7 --> M8
+        M8 -->|Yes| M9 --> M10
+        M8 -->|No| M10
     end
 
     subgraph MidDay["Phase 2: During the Day"]
         direction TB
-        D1["/dump\nPaste messy text\nget structured tasks"]
-        D2["/add-task\nSingle task with\nguided questions"]
-        D3["Natural language\nTask-organization\nskill activates"]
-        D4["/allocate-time\nMap tasks to\ncalendar slots"]
+        D1["/dump\nMultiple tasks → store\nwith auto IDs"]
+        D2["/add-task\nSingle task → store\nwith guided questions"]
+        D3["Natural language\ntask-organization\nskill → store"]
+        D4["/update-task\nChange status/timing\nMove between states"]
+        D5["/list-tasks\nQuery open work\nby status/tag/priority"]
     end
 
     subgraph Evening["Phase 3: /review-day"]
         direction TB
-        E1["Show today's task list"]
-        E2["Mark tasks complete\nMove to finished file"]
+        E1["Show today's tasks"]
+        E2["Mark complete\nin task store"]
         E3["Check overdue &\ndue-today tasks"]
-        E4["Show upcoming\ndue dates"]
-        E5["Update AREAS.md\nLast dates for\ncompleted recurring items"]
+        E4["Show upcoming\ndue dates from store"]
+        E5["Update AREAS.md\nLast dates"]
         E6["Show tomorrow's\nrecurring items"]
         E7["Day complete"]
 
         E1 --> E2 --> E3 --> E4 --> E5 --> E6 --> E7
     end
 
-    subgraph Files["Data Files"]
+    subgraph Files["Data"]
         direction LR
-        TODO["Today's Todo\nYYYY-MM-DD-todo.md"]
+        STORE["Task Store\ntasks/ directory\n(source of truth)"]
+        TODO["Today's Todo\nYYYY-MM-DD-todo.md\n(generated view)"]
         DONE["Today's Finished\nYYYY-MM-DD-finished.md"]
-        AREAS["AREAS.md\nRecurring items\nwith cadences"]
-        PROJ["PROJECTS.md\nActive projects\nwith progress"]
+        AREAS["AREAS.md\nRecurring items"]
+        PROJ["PROJECTS.md\nActive projects"]
         SCHED["scheduled/\nFuture tasks"]
-        YESTERDAY["Yesterday's Todo\nYYYY-MM-DD-todo.md"]
     end
 
-    YESTERDAY -.->|"incomplete tasks"| M2
-    SCHED -.->|"today's scheduled"| M3
+    STORE -.->|"in-progress + ready"| M1
+    SCHED -.->|"today's items"| M2
     AREAS -.->|"due items"| M6
     PROJ -.->|"active projects"| M5
-    M9 ==>|"creates"| TODO
-    M9 ==>|"creates"| DONE
+    M10 ==>|"generates"| TODO
+    M7 ==>|"moves to in-progress"| STORE
 
-    D1 & D2 & D3 -->|"add tasks"| TODO
-    D4 -.->|"reads"| TODO
+    D1 & D2 & D3 ==>|"write tasks"| STORE
+    D4 ==>|"updates"| STORE
+    D5 -.->|"reads"| STORE
 
     TODO -.->|"reads"| E1
-    E2 ==>|"moves completed"| DONE
+    E2 ==>|"marks done"| STORE
+    E2 ==>|"writes completed"| DONE
     E5 ==>|"updates Last dates"| AREAS
-    E6 -.->|"reads"| AREAS
 
     style Morning fill:#e8f5e9,stroke:#2e7d32
     style MidDay fill:#e3f2fd,stroke:#1565c0
     style Evening fill:#f3e5f5,stroke:#7b1fa2
     style Files fill:#fff8e1,stroke:#f9a825
-    style TODO fill:#a5d6a7,stroke:#2e7d32
+    style STORE fill:#a5d6a7,stroke:#2e7d32
+    style TODO fill:#c8e6c9,stroke:#2e7d32
     style DONE fill:#90a4ae,stroke:#546e7a
     style AREAS fill:#90caf9,stroke:#1565c0
     style PROJ fill:#ffcc80,stroke:#ef6c00
     style SCHED fill:#fff59d,stroke:#f9a825
-    style YESTERDAY fill:#ce93d8,stroke:#7b1fa2
 ```
 
 **Reading the diagram:**
-- **Dashed arrows** = reads from a file
-- **Thick arrows** = creates or writes to a file
-- The cycle between AREAS.md and the phases is key: `/start-day` reads it for reminders, `/review-day` writes back completion dates
-- All mid-day capture methods (slash commands and natural language) converge on a single file — today's todo
+- **Dashed arrows** = reads from
+- **Thick arrows** = writes to
+- The task store is central — all writes go through it, daily file is generated from it
+- Focus selection at `/start-day` replaces v3's rolling forward
 
 ---
 
@@ -122,36 +127,76 @@ OStaaT includes 5 proactive skills that respond to natural language. When you ta
 
 | You say... | Skill activated | What happens |
 |------------|----------------|--------------|
-| "I need to finish the report and call my accountant" | task-organization | Structures your tasks into OStaaT format and adds to today's file |
-| "How's my day looking?" | daily-workflow | Reads your daily file, checks priorities, helps you focus |
-| "I'm done for today" | daily-workflow | Suggests `/review-day` to close out |
-| "I want to track home maintenance" | area-management | Helps create an area with recurring items |
-| "The kitchen reno is behind schedule" | project-management | Helps update project status and timeline |
+| "I need to finish the report and call my accountant" | task-organization | Structures tasks, writes to task store with IDs |
+| "How's my day looking?" | daily-workflow | Reads task store, checks priorities, helps you focus |
+| "I'm done for today" | daily-workflow | Suggests `/review-day` to mark completions in store |
+| "I want to track home maintenance" | area-management | Helps create area with sub-areas and recurring items |
+| "The kitchen reno is behind schedule" | project-management | Shows task store stats for project, helps update |
+| "Show me all my waiting tasks" | daily-workflow | Suggests `/list-tasks --status waiting` |
 
 ### How skills work
 
 Skills are **routers, not replacements**. They recognize your intent and guide you to the right workflow:
 
-- **task-organization** is the one skill that can do the full capture-and-write flow itself, structuring messy input into tasks without needing `/dump`
-- **daily-workflow** suggests `/start-day`, `/review-day`, etc. at the right times based on context
-- **area-management** and **project-management** help with questions and suggest the appropriate commands
+- **task-organization** can do the full capture-and-write flow, structuring messy input into tasks with IDs in the task store
+- **daily-workflow** suggests `/start-day`, `/review-day`, `/update-task`, `/list-tasks` at the right times
+- **area-management** and **project-management** help with questions and suggest commands
 - **workspace-resolution** runs automatically before any command to find your data files
 
 ### Slash commands vs natural language
 
 | | Slash commands | Natural language |
 |---|---|---|
-| **Activation** | Deterministic — always runs exactly as designed | Probabilistic — Claude matches your intent to skill descriptions |
-| **Scope** | Full structured prompt with all edge cases handled | Skill provides guidance but is looser |
+| **Activation** | Deterministic — always runs exactly as designed | Probabilistic — Claude matches intent to skills |
+| **Scope** | Full structured prompt with all edge cases | Skill provides guidance but is looser |
 | **Consistency** | Same behavior every time | May vary based on phrasing |
-| **Best for** | Structured workflows (start of day, end of day, reviews) | Quick captures, questions, exploring what's available |
+| **Best for** | Structured workflows (start/end day, reviews) | Quick captures, questions, exploring |
 
-### Practical guidance
+---
 
-- **Starting and ending your day**: Use `/start-day` and `/review-day` — these do a lot of file management that benefits from the full command
-- **Capturing tasks mid-flow**: Natural language works great — just say what you need to do and the task-organization skill handles it
-- **Project and area management**: Start with natural language to explore, then use the commands when you're ready to make changes
-- **When in doubt**: Use the slash command — it's always the more complete path
+## Task Store
+
+The task store (`tasks/` directory) is the source of truth for all tasks. Daily files are generated views.
+
+### Task IDs
+
+Every task gets a unique ID: `t-001`, `t-042`, `t-117`. IDs are:
+- Sequential, never recycled
+- Assigned automatically on capture
+- Used to reference tasks everywhere (dependencies, commands, conversation)
+
+### Lifecycle states
+
+```
+inbox → ready → in-progress → done
+                    ↕
+                 waiting ↔ paused
+```
+
+Move tasks between states with `/update-task t-NNN <status>`.
+
+### Quick commands
+
+```
+/list-tasks                       → All open tasks by status
+/list-tasks --status ready        → Just the backlog
+/list-tasks --tag @work           → Filter by area
+/update-task t-017 waiting        → Move to waiting
+/update-task t-017 done           → Mark complete
+```
+
+---
+
+## Templates
+
+Unified templates in `templates/tasks/` can create tasks, projects, or both:
+
+```
+/new-from-template monthly-close  → Create tasks from a reusable checklist
+/new-from-template client-onboard → Create project + tasks with variables
+```
+
+Area recurring items can reference templates. When they come due, `/start-day` suggests instantiation.
 
 ---
 
@@ -161,38 +206,32 @@ OStaaT uses a central workspace that multiple Claude Code sessions can access si
 
 ### How it works
 
-- **Write commands** (like `/start-day`, `/dump`, `/review-day`) automatically acquire a lock before writing and release it when done.
-- **Read-only commands** (`/list-projects`, `/list-areas`, `/ostaat-help`) never lock — they're always safe to run.
-- The lock file is `{workspace_root}/.ostaat.lock` — it contains a session identifier and timestamp.
+- **Write commands** automatically acquire a lock before writing and release it when done.
+- **Read-only commands** (`/list-projects`, `/list-areas`, `/list-tasks`, `/ostaat-help`) never lock — always safe.
+- The lock file is `{workspace_root}/.ostaat.lock`.
 
 ### What happens with conflicts
 
-If you run a write command while another Claude session holds the lock:
+If you run a write command while another session holds the lock:
 ```
 🔒 Workspace is locked by another session.
 Locked by: /dump at 2026-03-17T14:30:00Z (from ~/code/my-project)
 Lock age: 3 minutes
 ```
 
-The command will not proceed. Wait for the other session to finish, or force-break with `/ostaat-unlock`.
+Wait for the other session to finish, or force-break with `/ostaat-unlock`.
 
 ### Stale locks
 
-Locks auto-expire after **10 minutes**. If a session crashes without releasing its lock, the next command will detect the stale lock and auto-break it. You can also manually break a lock with `/ostaat-unlock --force`.
-
-### Important notes
-
-- The lock file is in `.gitignore` — it's never committed
-- Long interactive commands (like `/start-day` which asks several questions) refresh the lock timestamp to prevent false expiry
-- If you frequently hit lock conflicts, consider keeping OStaaT work in one Claude session at a time
+Locks auto-expire after **10 minutes**. Stale locks are auto-broken. Manual break: `/ostaat-unlock --force`.
 
 ---
 
 ## Getting Help
 
-- Run `/ostaat-help` for an interactive overview of all commands and skills
-- Say "how does OStaaT work?" or "what can OStaaT do?" for natural language help
-- Run `/ostaat-help <command>` for details on a specific command (e.g., `/ostaat-help dump`)
+- Run `/ostaat-help` for an interactive overview of all commands
+- Say "how does OStaaT work?" for natural language help
+- Run `/ostaat-help <command>` for details on a specific command
 
 ---
 
@@ -201,36 +240,48 @@ Locks auto-expire after **10 minutes**. If a session crashes without releasing i
 ### Setup
 | Command | Description |
 |---------|-------------|
-| `/setup` | Initialize OStaaT workspace (central or per-project) |
+| `/setup` | Initialize OStaaT workspace with task store |
 
 ### Daily Workflow
 | Command | Description |
 |---------|-------------|
-| `/start-day` | Initialize today, roll forward tasks, show reminders |
-| `/dump` | Quick task capture from messy input |
-| `/brain-dump` | Full guided brain dump |
-| `/add-task` | Add a single task with guided questions |
-| `/review-day` | Mark complete, review upcoming items |
-| `/refine` | Refine existing tasks |
+| `/start-day` | Read task store, select focus, generate daily file |
+| `/dump` | Quick capture → task store with IDs |
+| `/brain-dump` | Full guided brain dump → task store |
+| `/add-task` | Single task with guided questions |
+| `/review-day` | Mark complete in store, update areas |
+| `/refine` | Break down into subtasks with IDs |
 | `/archive-old` | Archive files older than 3 days |
+
+### Task Management
+| Command | Description |
+|---------|-------------|
+| `/list-tasks` | Query task store by status, tag, priority |
+| `/update-task` | Change status, timing, move between states |
+| `/link-task` | Link tasks to projects or areas |
 
 ### Projects
 | Command | Description |
 |---------|-------------|
-| `/new-project` | Create a new project |
+| `/new-project` | Create project (with optional task template) |
 | `/list-projects` | Show all projects with status |
 | `/update-project` | Update project details or archive |
-| `/link-task` | Link tasks to projects or areas |
 | `/reopen-project` | Restore archived project |
 | `/review-projects` | Weekly project review |
 
 ### Areas
 | Command | Description |
 |---------|-------------|
-| `/new-area` | Create a new area of responsibility |
+| `/new-area` | Create area or sub-area |
 | `/list-areas` | Show areas with recurring item status |
-| `/update-area` | Manage recurring items, promote to project |
+| `/update-area` | Manage items, sub-areas, promote |
 | `/review-areas` | Periodic area review |
+
+### Templates & Migration
+| Command | Description |
+|---------|-------------|
+| `/new-from-template` | Instantiate task/project template |
+| `/migrate-tasks` | One-time v3→v4 migration |
 
 ### Integrations
 | Command | Description |

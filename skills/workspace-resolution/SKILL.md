@@ -1,6 +1,6 @@
 ---
 name: workspace-resolution
-description: This skill should be used BEFORE any OStaaT command reads or writes data files (AREAS.md, PROJECTS.md, daily todo/finished files, scheduled/, archive/, templates/). It resolves which workspace directory to use based on per-project overrides or the global central workspace, and enforces workspace locking to prevent concurrent write conflicts. It should activate automatically when any OStaaT command runs. It should NOT be used for general questions or conversations that don't involve OStaaT data files.
+description: This skill should be used BEFORE any OStaaT command reads or writes data files (AREAS.md, PROJECTS.md, daily todo/finished files, tasks/ store, scheduled/, archive/, templates/). It resolves which workspace directory to use based on per-project overrides or the global central workspace, and enforces workspace locking to prevent concurrent write conflicts. It should activate automatically when any OStaaT command runs. It should NOT be used for general questions or conversations that don't involve OStaaT data files.
 ---
 
 # Workspace Resolution Skill
@@ -61,7 +61,7 @@ The session identifier should be constructed from available context: the current
 
 ### Lock check algorithm
 
-**For WRITE commands** (`/start-day`, `/dump`, `/brain-dump`, `/add-task`, `/review-day`, `/refine`, `/archive-old`, `/new-project`, `/update-project`, `/link-task`, `/reopen-project`, `/review-projects`, `/new-area`, `/update-area`, `/review-areas`, `/pull`, `/allocate-time`):
+**For WRITE commands** (`/start-day`, `/dump`, `/brain-dump`, `/add-task`, `/review-day`, `/refine`, `/archive-old`, `/new-project`, `/update-project`, `/link-task`, `/reopen-project`, `/review-projects`, `/new-area`, `/update-area`, `/review-areas`, `/pull`, `/allocate-time`, `/update-task`, `/new-from-template`, `/migrate-tasks`):
 
 1. Read `{workspace_root}/.ostaat.lock`
 2. **If no lock file exists** → acquire the lock (create the file), proceed with command
@@ -87,7 +87,7 @@ The session identifier should be constructed from available context: the current
       ```
       **Do NOT proceed with the command.**
 
-**For READ-ONLY commands** (`/list-projects`, `/list-areas`, `/ostaat-help`):
+**For READ-ONLY commands** (`/list-projects`, `/list-areas`, `/list-tasks`, `/ostaat-help`):
 - Do NOT acquire a lock — these are safe to run concurrently
 - Do NOT check for a lock — reads are always allowed
 
@@ -124,12 +124,16 @@ Once resolved, ALL file operations use the workspace path:
 | Lock | `{workspace_root}/.ostaat.lock` |
 | AREAS.md | `{workspace}/{dataDir}/AREAS.md` |
 | PROJECTS.md | `{workspace}/{dataDir}/PROJECTS.md` |
+| Task store | `{workspace}/{dataDir}/tasks/` (or `{tasks.storeDir}/`) |
+| Task index | `{workspace}/{dataDir}/tasks/INDEX.md` |
+| Task status files | `{workspace}/{dataDir}/tasks/{status}.md` |
 | Daily todo | `{workspace}/{dataDir}/YYYY-MM-DD-todo.md` |
 | Daily finished | `{workspace}/{dataDir}/YYYY-MM-DD-finished.md` |
 | Scheduled | `{workspace}/{dataDir}/scheduled/` |
 | Archive | `{workspace}/{dataDir}/archive/` |
 | Project archive | `{workspace}/{dataDir}/projects-archive/` |
-| Templates | `{workspace}/{dataDir}/templates/` |
+| Project templates | `{workspace}/{dataDir}/templates/projects/` |
+| Task templates | `{workspace}/{dataDir}/templates/tasks/` |
 
 **Note:** `ostaat.json` and `.ostaat.lock` always live at the workspace root directory, NOT inside `dataDir`. This keeps config and locks separate from data in shared mode.
 
@@ -151,3 +155,4 @@ When `git.autoCommit` is enabled:
 - **ALWAYS release the lock when a write command completes**
 - **ALWAYS refresh the lock timestamp during long interactive commands**
 - **If resolution fails, tell the user to run /setup** — don't guess
+- **ALWAYS update both the task store AND daily file** when both exist — the store is authoritative, the daily file is the working view

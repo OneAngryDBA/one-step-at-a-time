@@ -1,13 +1,15 @@
 # Areas of Responsibility — Design Specification
 
-**Version:** 1.0.0
-**Status:** Implemented
+**Version:** 2.0.0
+**Status:** Implemented (Phase 1 — hierarchy support)
 
 ---
 
 ## Overview
 
 Areas represent ongoing responsibilities in your life — things with no end date that require regular attention. Based on the PARA method (Projects, Areas, Resources, Archives), Areas sit alongside Projects as an organizational layer, giving structure to habits, chores, maintenance, and obligations.
+
+**v4.0 additions:** Path-based area hierarchy (sub-areas), template references on recurring items, integration with the persistent task store.
 
 ---
 
@@ -19,63 +21,131 @@ Areas represent ongoing responsibilities in your life — things with no end dat
 |---|---|---|
 | **End state** | None — ongoing | Has a goal + deadline |
 | **Examples** | Home, Health, Finances | Kitchen Renovation, Tax Filing 2026 |
-| **Tag prefix** | `@` (e.g., @home) | `#` (e.g., #kitchen-reno) |
-| **Contains** | Recurring items | Tasks |
+| **Tag prefix** | `@` (e.g., @home, @work/engineering) | `#` (e.g., #kitchen-reno) |
+| **Contains** | Recurring items | Tasks (in task store) |
 | **Storage** | `AREAS.md` | `PROJECTS.md` |
+| **Hierarchy** | Path-based sub-areas | Flat |
 
 ### Relationship Rules
 
 - A **task** belongs to EITHER a project OR an area, never both
 - A **project** can optionally belong to an area (e.g., #kitchen-reno → @home)
 - A **recurring item** can be promoted to a project when it becomes complex
+- A **recurring item** can reference a template for automatic task creation
 
 ### Three Item Tiers
-
-Areas contain recurring items in three tiers:
 
 **🧘 Habits** — Daily routines, always soft, no consequences
 - Brush teeth, eat meals, exercise, meditate
 - Tracked by frequency (daily, X times per week)
-- Missing one is fine — gentle nudge at most
 
 **🔄 Maintenance** — Periodic chores, soft deadlines, no formal consequences
 - Vacuum, mow lawn, clean gutters, oil change
 - Tracked by cadence (weekly, monthly, seasonal)
-- Missing one isn't critical but builds up over time
 
 **📋 Obligations** — Hard deadlines with consequences that escalate
 - File taxes, pay bills, renew license, insurance payments
-- Tracked by hard due dates
-- Missing one has real consequences (fines, penalties, damage)
-- Consequences documented and surfaced when overdue
+- Tracked by hard due dates with documented consequences
+
+---
+
+## Area Hierarchy
+
+### Path-based tags
+
+Areas support unlimited depth in the data model, with Phase 1 implementing one level:
+
+| Tag | Type | Example |
+|-----|------|---------|
+| `@work` | Top-level area | Work responsibilities |
+| `@work/engineering` | Sub-area | Engineering-specific work |
+| `@work/management` | Sub-area | Management-specific work |
+| `@home` | Top-level area | Home responsibilities |
+| `@home/garden` | Sub-area | Garden maintenance |
+
+### Hierarchy rules
+
+- Path separator is `/`
+- Parent areas can have their own recurring items
+- Sub-areas inherit parent context but have their own items and counts
+- Tasks tagged `@work/engineering` are scoped to that sub-area
+- Tasks tagged `@work` apply to any work context
+- In Phase 2, energy blocks can be area-scoped (a `🧠 Deep @work` block can be used by `@work/engineering` tasks)
+
+### Configuration
+
+```json
+"areas": {
+  "hierarchyEnabled": true,
+  "maxDepth": 2
+}
+```
+
+`maxDepth: 2` means top-level + one sub-level. The data model supports deeper nesting for future use.
 
 ---
 
 ## Storage Format
 
-### AREAS.md Structure
+### AREAS.md Structure (with hierarchy)
 
 ```markdown
 # Areas of Responsibility
 
-## Home
-**Tag:** @home | **Items:** 5 | **Projects:** 2
+## Work @work
+**Items:** 8 | **Projects:** 3 | **Sub-areas:** 2
+
+**Recurring:**
+- 📋 Weekly status report — Every week (Fri) — Last: 2026-03-14 — ✅ Next: 2026-03-21
+
+### Engineering @work/engineering
+**Items:** 3 | **Projects:** 2
+
+**Recurring:**
+- 🔄 Review PRs — Every day (weekdays) — Last: 2026-03-18 — ✅ On track
+- 📋 Sprint retrospective — Every 2 weeks (Fri) — Last: 2026-03-07 — 📅 Due soon
+  Template: sprint-retro
+
+### Management @work/management
+**Items:** 2 | **Projects:** 1
+
+**Recurring:**
+- 📋 1:1 meetings — Every week (Tue) — Last: 2026-03-18 — ✅ On track
+
+**Projects:** #api-redesign, #docs-update
+
+---
+
+## Home @home
+**Items:** 5 | **Projects:** 2 | **Sub-areas:** 2
 
 **Recurring:**
 - 🧘 Make bed — Daily — Last: 2026-03-14 — ✅ On track
+- 📋 Pay mortgage — Every month (1st) — Last: 2026-03-01 — ✅ Next: 2026-04-01
+  ⚠️ If missed: Late fee ($50). After 30 days: credit score impact
+
+### Maintenance @home/maintenance
+**Items:** 3
+
+**Recurring:**
 - 🔄 Vacuum house — Every week (Sat) — Last: 2026-03-08 — ⚠️ Due today
 - 🔄 Mow lawn — Every 2 weeks (seasonal: Apr-Oct) — Last: n/a — 💤 Off-season
 - 📋 Change HVAC filter — Every 3 months — Last: 2026-01-10 — 🔴 Overdue (5 days)
   ⚠️ If missed: Reduced efficiency, potential system damage
-- 📋 Pay mortgage — Every month (1st) — Last: 2026-03-01 — ✅ Next: 2026-04-01
-  ⚠️ If missed: Late fee ($50). After 30 days: credit score impact. After 90 days: foreclosure proceedings
+
+### Garden @home/garden
+**Items:** 2
+
+**Recurring:**
+- 🔄 Water plants — Every 3 days — Last: 2026-03-17 — ✅ On track
+- 🔄 Prune hedges — Every month (seasonal: Mar-Oct) — Last: 2026-02-28 — 📅 Due soon
 
 **Projects:** #kitchen-reno, #garage-org
 
 ---
 
-## Health
-**Tag:** @health | **Items:** 3 | **Projects:** 1
+## Health @health
+**Items:** 3 | **Projects:** 1
 
 **Recurring:**
 - 🧘 Exercise — 4x/week — This week: 2/4 — ✅ On track
@@ -87,6 +157,14 @@ Areas contain recurring items in three tiers:
 
 ---
 ```
+
+### Key format points
+
+- Top-level areas use `## Name @tag`
+- Sub-areas use `### Name @parent/child-tag` (nested inside parent section)
+- Parent areas show `**Sub-areas:** N` in their header
+- The `**Projects:**` line appears at the end of the top-level area section (after sub-areas)
+- Sub-areas do NOT have their own Projects line — projects link to the top-level area or sub-area via `**Area:** @tag` in PROJECTS.md
 
 ### Recurring Item Format
 
@@ -104,6 +182,13 @@ Areas contain recurring items in three tiers:
 ```
 - 📋 {{description}} — {{cadence}} — Last: {{YYYY-MM-DD}} — {{status}}
   ⚠️ If missed: {{consequence}}. After {{time}}: {{escalation}}
+```
+
+**With template reference:**
+```
+- 📋 {{description}} — {{cadence}} — Last: {{YYYY-MM-DD}} — {{status}}
+  Template: {{template-name}}
+  Lead: {{Nd}}
 ```
 
 ### Cadence Formats
@@ -134,67 +219,68 @@ Areas contain recurring items in three tiers:
 | `💤 Off-season` | Seasonal item outside active window | All |
 | `⏸️ Paused` | Manually paused by user | All |
 
-For "X times per week" items, status includes progress: `This week: 2/4`
+---
 
-### Consequence Format (📋 Obligations only)
+## Template Integration
 
+Recurring items can reference templates from `templates/tasks/`:
+
+```markdown
+- 📋 Monthly financial close — Every month (last business day) — Last: 2026-02-28
+  Template: monthly-close
+  Lead: 3d
 ```
-⚠️ If missed: {{immediate consequence}}. After {{time}}: {{escalation}}
-```
 
-- Written once when the item is created
-- Surfaced in `/start-day` when the obligation is overdue
-- Multiple escalation tiers supported (separated by periods)
-- Examples:
-  - `⚠️ If missed: Late fee ($29). After 30 days: interest + credit score impact`
-  - `⚠️ If missed: Reduced air quality. After 6 months: potential system damage`
-  - `⚠️ If missed: Late filing penalty + interest. After 60 days: failure-to-file penalty (5%/month)`
+**How it works:**
+1. At `/start-day`, when the item is due (or within Lead time), the system suggests: "📋 Monthly close is due — instantiate template?"
+2. User confirms → `/new-from-template monthly-close` runs
+3. Template creates tasks in the task store with the area's @tag
+4. User selects which tasks to focus on today
+
+This bridges the gap between "recurring item is due" and "I have concrete tasks to work on."
 
 ---
 
 ## Item → Project Promotion
 
 Some recurring items become complex enough to warrant a project:
-- "File taxes" → create project with subtasks (gather docs, fill forms, review, submit)
+- "File taxes" → create project with subtasks
 - "Annual physical" → might spawn project if follow-up care is needed
 
 **How it works (via `/update-area`):**
 1. Select "Promote to project"
 2. Choose the recurring item
-3. System creates a new project linked to the area
+3. System creates a new project linked to the area (or sub-area)
 4. The recurring item stays in the area (it'll recur next cycle)
 5. The project gets `**Area:** @tag` automatically
+6. If a template exists, suggest instantiation for task creation
 
 ---
 
 ## Tag System
 
 ### Format
-- Areas: `@area-tag` (lowercase, hyphen-separated)
+- Areas: `@area-tag` or `@area/sub-area` (lowercase, hyphen-separated)
 - Projects: `#project-tag` (existing format)
 
 ### Mutual Exclusivity
 - A task has at most ONE tag — either `@area` or `#project`
 - If a task belongs to a project, the area context comes from the project's `**Area:** @tag` field
-- Commands enforce this: if user picks a project, no area tag is added
+- Commands enforce this at link time
 
-### Project-Area Linkage
-In PROJECTS.md, projects gain an optional area field:
-```markdown
-### Kitchen Renovation #kitchen-reno
-**Status:** 🟢 Active | **Progress:** 40% | **Due:** 2026-06-01 | **Area:** @home
-```
-
-AREAS.md shows a cross-reference: `**Projects:** #kitchen-reno, #garage-org`
+### Sub-area scoping
+- A task tagged `@work/engineering` belongs specifically to the engineering sub-area
+- A task tagged `@work` belongs to the broader work area
+- In Phase 2, energy blocks scoped to `@work` can be used by `@work/engineering` tasks (child inherits parent's blocks)
 
 ---
 
 ## Load Check
 
-The system measures load without making emotional assumptions. It presents data and asks questions.
+The system measures load without making emotional assumptions.
 
 ### Metrics (computed at `/start-day`)
-1. Today's task count
+1. Today's task count (from task store in-progress)
 2. Today's total time estimate (sum of 🔧)
 3. Recurring items due/nudging
 4. Overdue obligations count
@@ -215,44 +301,29 @@ The system measures load without making emotional assumptions. It presents data 
 ### Display (when thresholds exceeded)
 ```
 📊 Load Check:
-- 12 tasks today (threshold: 8)
+- 12 tasks in focus (threshold: 8)
 - 6 recurring items due
 - 3 obligations overdue
 
-Options: Triage recurring items / Move tasks to tomorrow / Proceed as-is
-```
-
-### "Things You'd Forget" (Gentle Reminders)
-At `/start-day`, the system checks for:
-- Items not done in significantly longer than their cadence (2x+ the period)
-- Seasonal items entering their active window
-- Items with "Due soon" status
-
-```
-🔔 Gentle Reminders:
-- Change HVAC filter — last done 95 days ago (every 3 months)
-- Mow lawn season starts next week
-- Dentist cleaning due in 6 weeks — consider scheduling
+Options: Move tasks back to ready / Triage recurring / Proceed as-is
 ```
 
 ---
 
 ## Commands Summary
 
-### New Commands
-- `/new-area` — Create a new area with recurring items
-- `/list-areas` — Show all areas with status
-- `/update-area` — Manage area items (add/edit/remove/pause/promote)
+### Area commands
+- `/new-area` — Create a new area or sub-area with recurring items
+- `/list-areas` — Show all areas with status (including hierarchy)
+- `/update-area` — Manage items, sub-areas, promote to project
 - `/review-areas` — Periodic area review
 
-### Modified Commands
-- `/start-day` — Add area reminders + load check
-- `/review-day` — Add upcoming recurring items + update last-done
-- `/dump` / `/brain-dump` — Add area linking option
-- `/add-task` — Add area linking option
-- `/link-task` — Support areas alongside projects
-- `/new-project` — Ask about area membership
-- `/review-projects` — Show area context
+### Modified commands (v4.0)
+- `/start-day` — Area reminders with template suggestions + lead time
+- `/review-day` — Update recurring item Last dates from task store completions
+- `/dump` / `/brain-dump` / `/add-task` — Area linking with sub-area support
+- `/link-task` — Support area tags including sub-areas
+- `/new-project` — Area linking with sub-area support
 
 ---
 
@@ -261,6 +332,8 @@ At `/start-day`, the system checks for:
 ```json
 "areas": {
   "enabled": true,
+  "hierarchyEnabled": true,
+  "maxDepth": 2,
   "showInStartDay": true,
   "showInReviewDay": true,
   "dueSoonDays": 2,
@@ -276,22 +349,12 @@ At `/start-day`, the system checks for:
 
 ---
 
-## Implementation Order
-
-1. Foundation — AREAS.md, /new-area, /list-areas, config
-2. Recurring Item Management — /update-area with status calculation
-3. Daily Integration — /start-day + /review-day modifications
-4. Task Linking — /dump, /add-task, /link-task modifications
-5. Project-Area Integration — /new-project + /review-projects modifications
-6. Polish — /review-areas, README update
-
----
-
 ## Philosophy
 
 Consistent with OStaaT principles:
-- **Reduce friction** — easy to add and track recurring items
-- **Create clarity** — three tiers make it obvious what needs attention
-- **Bias toward action** — nudge, don't nag
+- **Reduce friction** — easy to add and track recurring items, templates automate setup
+- **Create clarity** — three tiers + hierarchy make it obvious what needs attention
+- **Bias toward action** — lead times and templates bridge "item is due" to "here are tasks"
 - **Never assume emotions** — present data, let the user decide
 - **Don't invent** — only track what the user explicitly adds
+- **Structure when needed** — sub-areas add organization without forcing hierarchy

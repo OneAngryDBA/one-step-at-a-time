@@ -5,7 +5,7 @@ description: This skill should be used when managing areas of responsibility, re
 
 # Area Management Skill
 
-Help users manage their areas of responsibility — the ongoing parts of life that need regular attention but never "complete."
+Help users manage their areas of responsibility — the ongoing parts of life that need regular attention but never "complete." Supports area hierarchy with sub-areas.
 
 ## Three-Tier System
 
@@ -27,6 +27,21 @@ Help users manage their areas of responsibility — the ongoing parts of life th
 - Missing has real consequences (fines, penalties, damage)
 - Consequences are documented and surface when overdue
 
+## Area Hierarchy
+
+Areas support path-based hierarchy:
+- Top-level: `@work`, `@home`, `@health`
+- Sub-areas: `@work/engineering`, `@work/management`, `@home/garden`
+- Parent areas can have their own recurring items
+- Sub-areas inherit parent context but have their own items
+- Tasks tagged `@work/engineering` are scoped to that sub-area
+- Tasks tagged `@work` could apply to any work context
+
+### When to suggest sub-areas:
+- User has many items in one area (10+)
+- User mentions distinct categories within an area ("my work engineering stuff vs management stuff")
+- User wants different recurring items for different sub-contexts
+
 ## Recognizing Area Items in Conversation
 
 | User says | Likely tier | Why |
@@ -41,15 +56,16 @@ Help users manage their areas of responsibility — the ongoing parts of life th
 ## How to Help
 
 ### When user mentions a recurring responsibility:
-1. Recognize it: "That sounds like a recurring item for your @home area"
+1. Recognize it: "That sounds like a recurring item for your @home area" (or sub-area)
 2. Check if the area exists in `AREAS.md`
 3. If area exists: suggest adding the item via `/update-area`
 4. If area doesn't exist: suggest creating it via `/new-area`
 5. Help classify the tier (habit/maintenance/obligation)
+6. If the item has a known workflow, mention templates: "This could use a template for when it comes due"
 
 ### When user says "I keep forgetting to...":
 This is a strong signal they need tracking:
-1. Identify the right area
+1. Identify the right area (or sub-area)
 2. Classify the tier
 3. Set a cadence
 4. Add it so the system will remind them
@@ -64,7 +80,19 @@ This is a strong signal they need tracking:
 1. Acknowledge the hard deadline
 2. Show consequences if overdue
 3. If it's complex enough, suggest promoting to a project
-4. Help them plan when to tackle it
+4. If it has a template, suggest instantiating: `/new-from-template`
+5. Help them plan when to tackle it
+
+## Template Integration
+
+Recurring items can reference templates:
+```
+- 📋 Monthly financial close — Every month (last business day)
+  Template: monthly-close
+  Lead: 3d
+```
+
+When this item comes due, `/start-day` suggests instantiation. The template creates tasks in the task store, saving manual setup.
 
 ## Consequence Tracking
 
@@ -85,6 +113,8 @@ Some recurring items become complex when it's time to do them:
 
 Recognize when this is happening and suggest: "This seems like it needs its own plan. Want to promote it to a project? The recurring item stays in your area for next time."
 
+If a template exists for the item, also suggest: "There's a template for this — `/new-from-template` can create the project with tasks."
+
 ## Load Awareness
 
 If a user has many overdue or nudging items:
@@ -100,3 +130,4 @@ If a user has many overdue or nudging items:
 - **Present data, not judgment** — "3 items overdue" not "you're falling behind"
 - **Respect the tiers** — don't escalate a habit to an obligation without the user asking
 - **Nudge, don't nag** — surface gently, let them decide
+- **Support hierarchy** — suggest sub-areas when appropriate but don't force structure

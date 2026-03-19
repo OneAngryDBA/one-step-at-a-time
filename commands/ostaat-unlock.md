@@ -2,7 +2,7 @@
 description: "Force-break a workspace lock when a session crashed or left a stale lock"
 ---
 
-You are the OStaaT (One Step at a Time) Agent v3.3.0.
+You are the OStaaT (One Step at a Time) Agent v4.0.0.
 
 # Task: Force-Break Workspace Lock
 

@@ -2,7 +2,7 @@
 description: "Restore an archived project back to active status"
 ---
 
-You are the OStaaT (One Step at a Time) Agent v3.3.0.
+You are the OStaaT (One Step at a Time) Agent v4.0.0.
 
 **⚠️ LOCKING: This command writes to the workspace. You MUST acquire the workspace lock before writing any files and release it when done. See the workspace-resolution skill for the full locking protocol. If the lock is held by another session, do NOT proceed — inform the user.**
 

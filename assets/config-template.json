@@ -1,7 +1,22 @@
 {
-  "version": "3.1.0",
+  "version": "4.0.0",
   "mode": "dedicated",
   "dataDir": ".",
+  "tasks": {
+    "enabled": true,
+    "nextId": 1,
+    "showInboxAtStartDay": true,
+    "autoSelectInProgress": true,
+    "storeDir": "tasks"
+  },
+  "energy": {
+    "enabled": false,
+    "dimensions": []
+  },
+  "templates": {
+    "folder": "templates/tasks",
+    "promptOnAreaDue": true
+  },
   "archiving": {
     "daysBeforeArchive": 3,
     "autoArchiveOnStartDay": false,
@@ -81,7 +96,10 @@
       "/new-area",
       "/list-areas",
       "/update-area",
-      "/review-areas"
+      "/review-areas",
+      "/update-task",
+      "/new-from-template",
+      "/migrate-tasks"
     ],
     "commitThreshold": {
       "minChanges": 1,
@@ -107,6 +125,8 @@
   },
   "areas": {
     "enabled": true,
+    "hierarchyEnabled": true,
+    "maxDepth": 2,
     "showInStartDay": true,
     "showInReviewDay": true,
     "dueSoonDays": 2,
