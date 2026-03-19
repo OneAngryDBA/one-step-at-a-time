@@ -6,8 +6,8 @@
   "plugins": [
     {
       "name": "one-step-at-a-time",
-      "version": "3.1.0",
-      "description": "Comprehensive daily task, project, and life management system using the PARA method. Includes 20 slash commands, 5 proactive skills, and support for recurring items with consequence tracking.",
+      "version": "3.3.0",
+      "description": "Comprehensive daily task, project, and life management system using the PARA method. Transform messy thoughts into organized tasks, track projects with goals and timelines, manage areas of responsibility with habits/maintenance/obligations, and maintain a daily workflow with automatic rollover. Includes 22 slash commands, 6 proactive skills, workspace locking for concurrent session safety, and support for recurring items with consequence tracking.",
       "author": {
         "name": "Matt Brennan"
       },
