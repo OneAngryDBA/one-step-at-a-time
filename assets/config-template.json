@@ -22,7 +22,7 @@
     "folder": "templates/tasks",
     "promptOnAreaDue": true
   },
-  "tunnel": {
+  "hyperfocus": {
     "active": false,
     "target": null,
     "targetName": null,
@@ -118,7 +118,7 @@
       "/upgrade",
       "/energy-calendar",
       "/panic",
-      "/tunnel"
+      "/hyperfocus"
     ],
     "commitThreshold": {
       "minChanges": 1,

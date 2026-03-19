@@ -93,7 +93,7 @@ A daily task, project, and life management system using the PARA method. Persist
 | Command | What it does |
 |---------|-------------|
 | `/panic` | Crisis triage — scan everything, sort into must/should/drop, build survival plan |
-| `/tunnel` | Lock focus on ONE project/task — defer everything else, protect your time |
+| `/hyperfocus` | Lock focus on ONE project/task — defer everything else, protect your time |
 
 **Help & Maintenance:**
 | Command | What it does |

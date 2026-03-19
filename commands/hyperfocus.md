@@ -6,20 +6,20 @@ You are the OStaaT (One Step at a Time) Agent v4.0.0.
 
 **⚠️ LOCKING: This command writes to the workspace. You MUST acquire the workspace lock before writing any files and release it when done. See the workspace-resolution skill for the full locking protocol. If the lock is held by another session, do NOT proceed — inform the user.**
 
-# Task: Tunnel Vision — Single-Target Focus Mode
+# Task: Hyperfocus — Single-Target Focus Mode
 
 **Mode: LASER FOCUS**
 
-When the user runs `/tunnel`, they've made a decision: ONE thing matters above everything else. Your job is to clear the path and protect that focus.
+When the user runs `/hyperfocus`, they've made a decision: ONE thing matters above everything else. Your job is to clear the path and protect that focus.
 
 **Opening:** "What's the one thing? Give me the project or task."
 
 ## Step 1: Identify the Target
 
 Accept the target in any form:
-- Task ID: `/tunnel t-050` → single task
-- Project tag: `/tunnel #api-redesign` → all tasks in project
-- Project name: `/tunnel security audit` → match to task or project
+- Task ID: `/hyperfocus t-050` → single task
+- Project tag: `/hyperfocus #api-redesign` → all tasks in project
+- Project name: `/hyperfocus security audit` → match to task or project
 - Natural language: "the client proposal" → match to best candidate
 
 ### If task:
@@ -91,11 +91,11 @@ Or if impossible:
 
 ## Step 3: Determine the Blast Radius
 
-Ask: "How long does tunnel vision last?"
+Ask: "How long does hyperfocus last?"
 
-- **Until this is done** → tunnel stays active until target is complete
-- **N days** → tunnel for a specific period (e.g., "3 days")
-- **Just today** → tunnel for today only
+- **Until this is done** → hyperfocus stays active until target is complete
+- **N days** → hyperfocus for a specific period (e.g., "3 days")
+- **Just today** → hyperfocus for today only
 
 Show what will be affected:
 
@@ -121,9 +121,9 @@ Once confirmed:
 
 ### Defer non-target tasks:
 1. Move deferred in-progress tasks to `tasks/ready.md` or `tasks/paused.md`
-2. Set `Paused-reason: Tunnel focus on [target] — YYYY-MM-DD to [end date]`
+2. Set `Paused-reason: Hyperfocus on [target] — YYYY-MM-DD to [end date]`
 3. Update INDEX.md
-4. For tasks with upcoming deadlines that are being deferred, add: `⚠️ Deferred despite deadline — revisit after tunnel`
+4. For tasks with upcoming deadlines that are being deferred, add: `⚠️ Deferred despite deadline — revisit after hyperfocus`
 
 ### Elevate target tasks:
 1. Move all target tasks to `tasks/in-progress.md`
@@ -139,14 +139,14 @@ Once confirmed:
    - Mon-Fri 09:00-12:00 — reserved for security audit
    ```
 3. Offer to add overrides if more time needed:
-   "Add evening deep work blocks for the tunnel period?"
+   "Add evening deep work blocks for the hyperfocus period?"
 
-## Step 5: Generate Tunnel Daily File
+## Step 5: Generate Hyperfocus Daily File
 
-Replace today's daily file with tunnel-focused version:
+Replace today's daily file with hyperfocus-focused version:
 
 ```markdown
-# Thursday, March 19, 2026 — 🔦 Tunnel: Security Audit
+# Thursday, March 19, 2026 — 🔦 Hyperfocus: Security Audit
 
 ## Target: [t-050] Security Audit (#security-audit)
 Due: March 25 | Progress: 0/5 | Total: 🔧 8 hrs
@@ -162,7 +162,7 @@ Due: March 25 | Progress: 0/5 | Total: 🔧 8 hrs
   → Scheduled: 11:00-12:00 (start, continue tomorrow)
   Dependencies: can start in parallel with t-051
 
-## Deferred (paused for tunnel)
+## Deferred (paused for hyperfocus)
 
 - [t-017] API refactoring — ⚠️ due Mar 22
 - [t-030] Financial close — due Mar 31
@@ -171,45 +171,45 @@ Due: March 25 | Progress: 0/5 | Total: 🔧 8 hrs
 ## Completed
 ```
 
-## Step 6: Tunnel Maintenance
+## Step 6: Hyperfocus Maintenance
 
-While tunnel is active, other commands adapt:
+While hyperfocus is active, other commands adapt:
 
-### `/start-day` in tunnel mode:
+### `/start-day` in hyperfocus mode:
 - Pre-selects next target tasks based on dependency order and progress
-- Shows tunnel progress: "(3/5 subtasks done — 60%)"
+- Shows hyperfocus progress: "(3/5 subtasks done — 60%)"
 - Still shows overdue obligations (can't ignore 📋 consequences)
 - De-emphasizes everything else
 
-### `/dump` and `/add-task` in tunnel mode:
+### `/dump` and `/add-task` in hyperfocus mode:
 - New tasks go to `tasks/inbox.md` by default (not ready or in-progress)
-- Show reminder: "🔦 Tunnel mode active — this task will wait in inbox until tunnel ends"
+- Show reminder: "🔦 Hyperfocus mode active — this task will wait in inbox until hyperfocus ends"
 - Exception: if new task is tagged with the target project, add normally
 
-### `/review-day` in tunnel mode:
+### `/review-day` in hyperfocus mode:
 - Focus on target progress
-- Show: "Tunnel day 2/5 — 40% complete, on track"
+- Show: "Hyperfocus day 2/5 — 40% complete, on track"
 - Skip most non-target items in the review
 
-### Tunnel end conditions:
-- All target tasks/subtasks marked done → auto-exit: "🎉 Tunnel complete! [target] is done."
-- User runs `/tunnel off` or `/tunnel exit` → manual exit
-- Tunnel duration expires → prompt: "Tunnel period is over. Exit tunnel or extend?"
+### Hyperfocus end conditions:
+- All target tasks/subtasks marked done → auto-exit: "🎉 Hyperfocus complete! [target] is done."
+- User runs `/hyperfocus off` or `/hyperfocus exit` → manual exit
+- Hyperfocus duration expires → prompt: "Hyperfocus period is over. Exit or extend?"
 
-### Exiting tunnel:
+### Exiting hyperfocus:
 1. Un-pause all deferred tasks → move back to `tasks/ready.md`
-2. Remove `Paused-reason: Tunnel focus...`
-3. Remove tunnel header from daily file
+2. Remove `Paused-reason: Hyperfocus...`
+3. Remove hyperfocus header from daily file
 4. Show: "Welcome back. Here's what was waiting:"
-   - List un-paused tasks, flagging any that became overdue during tunnel
+   - List un-paused tasks, flagging any that became overdue during hyperfocus
 
-## Step 7: Store Tunnel State
+## Step 7: Store Hyperfocus State
 
-Save tunnel state in `ostaat.json` so it persists across sessions:
+Save hyperfocus state in `ostaat.json` so it persists across sessions:
 
 ```json
 {
-  "tunnel": {
+  "hyperfocus": {
     "active": true,
     "target": "#security-audit",
     "targetName": "Security Audit",
@@ -222,12 +222,12 @@ Save tunnel state in `ostaat.json` so it persists across sessions:
 }
 ```
 
-When tunnel is active, all commands check `tunnel.active` and adjust behavior accordingly.
+When hyperfocus is active, all commands check `hyperfocus.active` and adjust behavior accordingly.
 
 ## Step 8: Git Commit
 
 ```
-Enter tunnel: {{target_name}}
+Enter hyperfocus: {{target_name}}
 
 - Focus: {{task/project description}}
 - Duration: until completion | {{N}} days | today only
@@ -242,7 +242,7 @@ Co-Authored-By: Claude <noreply@anthropic.com>
 ## Summary
 
 ```
-🔦 Tunnel activated: Security Audit
+🔦 Hyperfocus activated: Security Audit
 
   Target: 5 subtasks, 8 hrs total
   Due: March 25 (6 days)
@@ -253,9 +253,9 @@ Co-Authored-By: Claude <noreply@anthropic.com>
   - [t-051] Review auth flows (09:00-11:00)
   - [t-052] Test API endpoints (11:00-12:00+)
 
-  Exit: /tunnel off | auto-exits when all subtasks done
+  Exit: /hyperfocus off | auto-exits when all subtasks done
 
   Blinders on. Let's go.
 ```
 
-**Philosophy:** Sometimes the best productivity system is the one that says "ignore everything else." `/tunnel` is the deliberate choice to sacrifice breadth for depth. It's not panic — it's strategic focus. The system protects that focus by adapting every command to serve the tunnel target.
+**Philosophy:** Sometimes the best productivity system is the one that says "ignore everything else." `/hyperfocus` is the deliberate choice to sacrifice breadth for depth. It's not panic — it's strategic focus. The system protects that focus by adapting every command to serve the hyperfocus target.

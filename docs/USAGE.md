@@ -301,4 +301,4 @@ Locks auto-expire after **10 minutes**. Stale locks are auto-broken. Manual brea
 | Command | Description |
 |---------|-------------|
 | `/panic` | Crisis triage across everything |
-| `/tunnel` | Lock focus on one project/task |
+| `/hyperfocus` | Lock focus on one project/task |

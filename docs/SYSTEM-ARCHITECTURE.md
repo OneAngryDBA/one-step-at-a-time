@@ -551,7 +551,7 @@ See `docs/ENERGY-DESIGN.md` for the full specification.
 | Command | Purpose |
 |---------|---------|
 | `/panic` | Crisis triage — scan all fires, ruthless must/should/drop, survival plan |
-| `/tunnel` | Lock focus on one project/task — defer everything else |
+| `/hyperfocus` | Lock focus on one project/task — defer everything else |
 
 ---
 
