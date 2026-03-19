@@ -36,7 +36,7 @@ A daily task, project, and life management system using the PARA method. Persist
 - "I'm wrapping up for today" → end-of-day review suggested
 - "Show me my waiting tasks" → task store query
 
-### All Commands (28)
+### All Commands (30)
 
 **Setup:** `/setup`
 
@@ -88,6 +88,12 @@ A daily task, project, and life management system using the PARA method. Persist
 | `/allocate-time` | Schedule tasks against energy blocks and Google Calendar |
 | `/energy-calendar` | View and manage energy calendar (weekly defaults, overrides, capacity) |
 | `/pull` | Import tasks from Jira, GitHub, Slack, Google Docs |
+
+**Focus Modes:**
+| Command | What it does |
+|---------|-------------|
+| `/panic` | Crisis triage — scan everything, sort into must/should/drop, build survival plan |
+| `/tunnel` | Lock focus on ONE project/task — defer everything else, protect your time |
 
 **Help & Maintenance:**
 | Command | What it does |

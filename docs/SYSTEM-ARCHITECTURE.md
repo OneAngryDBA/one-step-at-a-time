@@ -547,6 +547,12 @@ See `docs/ENERGY-DESIGN.md` for the full specification.
 | `/ostaat-help` | Interactive help and command reference |
 | `/ostaat-unlock` | Force-break a stale workspace lock |
 
+### Focus Modes
+| Command | Purpose |
+|---------|---------|
+| `/panic` | Crisis triage — scan all fires, ruthless must/should/drop, survival plan |
+| `/tunnel` | Lock focus on one project/task — defer everything else |
+
 ---
 
 ## Design Philosophy

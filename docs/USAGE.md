@@ -296,3 +296,9 @@ Locks auto-expire after **10 minutes**. Stale locks are auto-broken. Manual brea
 |---------|-------------|
 | `/ostaat-help` | Interactive help and command reference |
 | `/ostaat-unlock` | Force-break a stale workspace lock |
+
+### Focus Modes
+| Command | Description |
+|---------|-------------|
+| `/panic` | Crisis triage across everything |
+| `/tunnel` | Lock focus on one project/task |

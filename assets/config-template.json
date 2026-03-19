@@ -22,6 +22,16 @@
     "folder": "templates/tasks",
     "promptOnAreaDue": true
   },
+  "tunnel": {
+    "active": false,
+    "target": null,
+    "targetName": null,
+    "startDate": null,
+    "endDate": null,
+    "endCondition": null,
+    "deferredTasks": [],
+    "keptTasks": []
+  },
   "archiving": {
     "daysBeforeArchive": 3,
     "autoArchiveOnStartDay": false,
@@ -106,7 +116,9 @@
       "/new-from-template",
       "/migrate-tasks",
       "/upgrade",
-      "/energy-calendar"
+      "/energy-calendar",
+      "/panic",
+      "/tunnel"
     ],
     "commitThreshold": {
       "minChanges": 1,

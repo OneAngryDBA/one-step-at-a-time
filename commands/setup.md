@@ -193,7 +193,7 @@ Personal task management workspace powered by [One Step at a Time](https://githu
 - `/review-day` — End-of-day review
 - `/list-tasks` — See all open tasks
 
-See the [full documentation](https://github.com/OneAngryDBA/one-step-at-a-time) for all 28 commands.
+See the [full documentation](https://github.com/OneAngryDBA/one-step-at-a-time) for all 30 commands.
 ```
 
 If mode is **shared**, skip the README (the repo likely has its own).
