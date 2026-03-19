@@ -99,7 +99,8 @@
       "/review-areas",
       "/update-task",
       "/new-from-template",
-      "/migrate-tasks"
+      "/migrate-tasks",
+      "/upgrade"
     ],
     "commitThreshold": {
       "minChanges": 1,

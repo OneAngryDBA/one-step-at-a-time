@@ -502,7 +502,8 @@ Not all recurring items are created equal. The three-tier system reflects realit
 | Command | Purpose |
 |---------|---------|
 | `/new-from-template` | Instantiate a unified task/project template |
-| `/migrate-tasks` | One-time v3→v4 migration |
+| `/upgrade` | Upgrade workspace from any previous version to latest |
+| `/migrate-tasks` | Extract tasks from daily files into task store |
 
 ### External Integrations
 | Command | Purpose |

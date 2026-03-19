@@ -379,24 +379,31 @@ Directory name for the task store, relative to `{dataDir}`. Default: `"tasks"`.
 
 ---
 
-## Migration Strategy
+## Migration & Upgrade
 
-### v3 → v4 progression
+### `/upgrade` command
 
-1. **v4.0-alpha**: Add task store, dual-write to both task store and daily file
-2. **v4.0-beta**: Commands read from task store as primary source, fall back to old behavior
-3. **v4.0**: `/migrate-tasks` extracts tasks from existing daily files into task store
-4. **v4.1**: Remove dual-write and backward compatibility
+The `/upgrade` command handles upgrading a workspace from any previous version to v4.0.0. It detects the current version and walks through each step:
+
+| Upgrade | Key changes |
+|---------|------------|
+| v3.0 → v3.1 | Rename `todo-config.json` → `ostaat.json`, add workspace mode/dataDir, central workspace pointer |
+| v3.1 → v3.2 | No config changes (help system is plugin-side) |
+| v3.2 → v3.3 | Add `.ostaat.lock` to `.gitignore` |
+| v3.3 → v4.0 | Add `tasks`, `energy`, `templates` config sections; create `tasks/` directory; optionally run `/migrate-tasks` |
+
+Each step applies in sequence. The upgrade is non-destructive, incremental, and reversible via git.
 
 ### `/migrate-tasks` command
 
-One-time migration that:
+Extracts tasks from existing daily files into the task store. Called by `/upgrade` for the v3→v4 transition, or run standalone at any time:
+
 1. Scans existing daily todo files (current + archived)
-2. Extracts incomplete tasks
+2. Extracts incomplete tasks, deduplicates carried-over copies
 3. Assigns sequential IDs
-4. Writes to appropriate status files (incomplete → ready, tasks from today → in-progress)
-5. Builds INDEX.md
-6. Adds completed tasks from finished files to INDEX.md as `done`
+4. Converts `📌 Carried over from:` notes to `Focus-dates:`
+5. Writes to appropriate status files (today's tasks → in-progress, others → ready)
+6. Builds INDEX.md (includes completed tasks from finished files as `done`)
 
 ---
 

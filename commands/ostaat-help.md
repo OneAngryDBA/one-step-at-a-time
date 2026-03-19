@@ -36,7 +36,7 @@ A daily task, project, and life management system using the PARA method. Persist
 - "I'm wrapping up for today" → end-of-day review suggested
 - "Show me my waiting tasks" → task store query
 
-### All Commands (26)
+### All Commands (27)
 
 **Setup:** `/setup`
 
@@ -79,7 +79,8 @@ A daily task, project, and life management system using the PARA method. Persist
 | Command | What it does |
 |---------|-------------|
 | `/new-from-template` | Instantiate a reusable task/project template |
-| `/migrate-tasks` | One-time v3→v4 migration from daily files to task store |
+| `/upgrade` | Upgrade workspace from any previous version to latest |
+| `/migrate-tasks` | Extract tasks from daily files into task store |
 
 **Integrations:**
 | Command | What it does |

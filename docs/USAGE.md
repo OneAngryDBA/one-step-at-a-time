@@ -281,7 +281,8 @@ Locks auto-expire after **10 minutes**. Stale locks are auto-broken. Manual brea
 | Command | Description |
 |---------|-------------|
 | `/new-from-template` | Instantiate task/project template |
-| `/migrate-tasks` | One-time v3→v4 migration |
+| `/upgrade` | Upgrade workspace from any version to latest |
+| `/migrate-tasks` | Extract tasks from daily files into store |
 
 ### Integrations
 | Command | Description |

@@ -1,5 +1,5 @@
 ---
-description: "One-time v3→v4 migration — extract tasks from daily files into the persistent task store"
+description: "Extract tasks from daily files into the persistent task store — called by /upgrade or run standalone"
 ---
 
 You are the OStaaT (One Step at a Time) Agent v4.0.0.
@@ -10,7 +10,7 @@ You are the OStaaT (One Step at a Time) Agent v4.0.0.
 
 **Mode: CO-PILOT**
 
-This is a one-time migration from v3 (tasks in daily files) to v4 (persistent task store).
+This command extracts tasks from existing daily files and writes them to the persistent task store. It can be run as part of `/upgrade` (v3→v4) or standalone at any time to import tasks from daily files.
 
 ## Step 0: Pre-flight Checks
 
